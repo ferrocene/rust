@@ -24,7 +24,7 @@ all:
 
 	# Run rustc with `-Ztemps-dir` set to a directory 
 	# *inside* the inaccessible one, so that it can't create it
-	$(RUSTC) program.rs -Ztemps-dir=$(TMPDIR)/inaccessible/tmp 2>&1 \
+	$(RUSTC) program.rs --target "${TARGET}" -Ztemps-dir=$(TMPDIR)/inaccessible/tmp 2>&1 \
 		| $(CGREP) 'failed to find or create the directory specified by `--temps-dir`'
 
 	# Make the inaccessible directory accessible,
