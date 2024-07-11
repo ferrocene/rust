@@ -1,5 +1,5 @@
-use anyhow::{Context, Error};
-use std::collections::{BTreeMap, BTreeSet};
+use anyhow::Error;
+use std::collections::BTreeSet;
 use std::io::Write;
 use std::path::{Path, PathBuf};
 
@@ -11,25 +11,22 @@ mod cargo_metadata;
 ///
 /// Run `x.py run generate-metadata`
 fn main() -> Result<(), Error> {
-    let dest = env_path("DEST")?;
+    let dest_file = env_path("DEST")?;
+    let out_dir = env_path("OUT_DIR")?;
     let cargo = env_path("CARGO")?;
     let license_metadata = env_path("LICENSE_METADATA")?;
 
     let collected_tree_metadata: Metadata =
         serde_json::from_slice(&std::fs::read(&license_metadata)?)?;
 
-    let mut collected_cargo_metadata = BTreeSet::new();
-
     let root_path = std::path::absolute(".")?;
-    for dep in cargo_metadata::get(&cargo, Path::new("./Cargo.toml"), &root_path)? {
-        collected_cargo_metadata.insert(dep);
-    }
-    for dep in cargo_metadata::get(&cargo, Path::new("./src/tools/cargo/Cargo.toml"), &root_path)? {
-        collected_cargo_metadata.insert(dep);
-    }
-    for dep in cargo_metadata::get(&cargo, Path::new("./library/std/Cargo.toml"), &root_path)? {
-        collected_cargo_metadata.insert(dep);
-    }
+    let workspace_paths = [
+        Path::new("./Cargo.toml"),
+        Path::new("./src/tools/cargo/Cargo.toml"),
+        Path::new("./library/std/Cargo.toml"),
+    ];
+    let collected_cargo_metadata =
+        cargo_metadata::get(&cargo, &out_dir, &root_path, &workspace_paths)?;
 
     let mut license_set = BTreeSet::new();
 
@@ -46,7 +43,7 @@ fn main() -> Result<(), Error> {
     writeln!(buffer)?;
     writeln!(buffer, "* [In-tree files](#in-tree-files)")?;
     writeln!(buffer, "* [Out-of-tree files](#out-of-tree-files)")?;
-    writeln!(buffer, "* [License Texts](#license-texts)")?;
+    // writeln!(buffer, "* [License Texts](#license-texts)")?;
     writeln!(buffer)?;
 
     writeln!(buffer, "## In-tree files")?;
@@ -69,17 +66,7 @@ fn main() -> Result<(), Error> {
     writeln!(buffer)?;
     render_deps(collected_cargo_metadata.iter(), &mut buffer, &mut license_set)?;
 
-    // Now we've rendered the tree, we can fetch all the license texts we've just referred to
-    let license_map = load_licenses(license_set)?;
-
-    writeln!(buffer)?;
-    writeln!(buffer, "## License Texts")?;
-    writeln!(buffer)?;
-    writeln!(buffer, "The following texts relate to the license identifiers used above:")?;
-    writeln!(buffer)?;
-    render_license_texts(&license_map, &mut buffer)?;
-
-    std::fs::write(&dest, &buffer)?;
+    std::fs::write(&dest_file, &buffer)?;
 
     Ok(())
 }
@@ -187,66 +174,36 @@ fn render_deps<'a, 'b>(
     buffer: &'b mut Vec<u8>,
     license_set: &mut BTreeSet<String>,
 ) -> Result<(), Error> {
-    writeln!(buffer, "| Package | License | Authors |")?;
-    writeln!(buffer, "|---------|---------|---------|")?;
     for dep in deps {
         let authors_list = dep.authors.join(", ").replace("<", "\\<").replace(">", "\\>");
         let url = format!("https://crates.io/crates/{}/{}", dep.name, dep.version);
+        writeln!(buffer)?;
         writeln!(
             buffer,
-            "| [{name} {version}]({url}) | {license} | {authors} |",
+            "### [{name} {version}]({url})",
             name = dep.name,
             version = dep.version,
-            license = dep.license,
             url = url,
-            authors = authors_list
         )?;
+        writeln!(buffer)?;
+        writeln!(buffer, "* Authors: {}", authors_list)?;
+        writeln!(buffer, "* License: {}", dep.license)?;
         license_set.insert(dep.license.clone());
+        for (name, contents) in &dep.notices {
+            writeln!(buffer)?;
+            writeln!(buffer, "#### {}", name.to_string_lossy())?;
+            writeln!(buffer)?;
+            writeln!(buffer, "<details><summary>Click to expand</summary>")?;
+            writeln!(buffer)?;
+            writeln!(buffer, "```")?;
+            writeln!(buffer, "{}", contents)?;
+            writeln!(buffer, "```")?;
+            writeln!(buffer)?;
+            writeln!(buffer, "</details>")?;
+        }
     }
     Ok(())
 }
-
-/// Download licenses from SPDX Github
-fn load_licenses(license_set: BTreeSet<String>) -> Result<BTreeMap<String, String>, Error> {
-    let mut license_map = BTreeMap::new();
-    for license_string in license_set {
-        let mut licenses = Vec::new();
-        for word in license_string.split([' ', '/', '(', ')']) {
-            let trimmed = word.trim_end_matches('+').trim();
-            if !["OR", "AND", "WITH", "NONE", ""].contains(&trimmed) {
-                licenses.push(trimmed);
-            }
-        }
-        for license in licenses {
-            if !license_map.contains_key(license) {
-                let text = get_license_text(license)?;
-                license_map.insert(license.to_owned(), text);
-            }
-        }
-    }
-    Ok(license_map)
-}
-
-/// Render license texts, with a heading
-fn render_license_texts(
-    license_map: &BTreeMap<String, String>,
-    buffer: &mut Vec<u8>,
-) -> Result<(), Error> {
-    for (name, text) in license_map.iter() {
-        writeln!(buffer, "### {}", name)?;
-        writeln!(buffer)?;
-        writeln!(buffer, "<details><summary>Show Text</summary>")?;
-        writeln!(buffer)?;
-        writeln!(buffer, "```")?;
-        writeln!(buffer, "{}", text)?;
-        writeln!(buffer, "```")?;
-        writeln!(buffer)?;
-        writeln!(buffer, "</details>")?;
-        writeln!(buffer)?;
-    }
-    Ok(())
-}
-
 /// Describes a tree of metadata for our filesystem tree
 #[derive(serde::Deserialize)]
 struct Metadata {
@@ -269,16 +226,6 @@ pub(crate) enum Node {
 struct License {
     spdx: String,
     copyright: Vec<String>,
-}
-
-/// Fetch a license text
-pub fn get_license_text(name: &str) -> Result<String, anyhow::Error> {
-    let license_path =
-        PathBuf::from(format!("./src/tools/generate-copyright/licenses/{}.txt", name));
-    let contents = std::fs::read_to_string(&license_path).with_context(|| {
-        format!("Cannot open {:?} from CWD {:?}", license_path, std::env::current_dir())
-    })?;
-    Ok(contents)
 }
 
 /// Grab an environment variable as a PathBuf, or fail nicely.
