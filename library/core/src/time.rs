@@ -617,16 +617,14 @@ impl Duration {
     ///
     /// # Examples
     ///
-    /// Basic usage:
-    ///
     /// ```
     /// use std::time::Duration;
     ///
     /// assert_eq!(Duration::new(100, 0).abs_diff(Duration::new(80, 0)), Duration::new(20, 0));
     /// assert_eq!(Duration::new(100, 400_000_000).abs_diff(Duration::new(110, 0)), Duration::new(9, 600_000_000));
     /// ```
-    #[stable(feature = "duration_abs_diff", since = "CURRENT_RUSTC_VERSION")]
-    #[rustc_const_stable(feature = "duration_abs_diff", since = "CURRENT_RUSTC_VERSION")]
+    #[stable(feature = "duration_abs_diff", since = "1.81.0")]
+    #[rustc_const_stable(feature = "duration_abs_diff", since = "1.81.0")]
     #[rustc_allow_const_fn_unstable(const_option)]
     #[must_use = "this returns the result of the operation, \
                   without modifying the original"]
@@ -639,8 +637,6 @@ impl Duration {
     /// if overflow occurred.
     ///
     /// # Examples
-    ///
-    /// Basic usage:
     ///
     /// ```
     /// use std::time::Duration;
@@ -700,8 +696,6 @@ impl Duration {
     ///
     /// # Examples
     ///
-    /// Basic usage:
-    ///
     /// ```
     /// use std::time::Duration;
     ///
@@ -758,8 +752,6 @@ impl Duration {
     ///
     /// # Examples
     ///
-    /// Basic usage:
-    ///
     /// ```
     /// use std::time::Duration;
     ///
@@ -813,8 +805,6 @@ impl Duration {
     /// if `other == 0`.
     ///
     /// # Examples
-    ///
-    /// Basic usage:
     ///
     /// ```
     /// use std::time::Duration;

@@ -32,7 +32,7 @@ use crate::clean::utils::find_nearest_parent_module;
 use crate::clean::{self, ExternalCrate, PrimitiveType};
 use crate::formats::cache::Cache;
 use crate::formats::item_type::ItemType;
-use crate::html::escape::Escape;
+use crate::html::escape::{Escape, EscapeBodyText};
 use crate::html::render::Context;
 use crate::passes::collect_intra_doc_links::UrlFragment;
 
@@ -988,6 +988,7 @@ pub(crate) fn anchor<'a, 'cx: 'a>(
                 f,
                 r#"<a class="{short_ty}" href="{url}" title="{short_ty} {path}">{text}</a>"#,
                 path = join_with_double_colon(&fqp),
+                text = EscapeBodyText(text.as_str()),
             )
         } else {
             f.write_str(text.as_str())
@@ -1005,6 +1006,7 @@ fn fmt_type<'cx>(
 
     match *t {
         clean::Generic(name) => f.write_str(name.as_str()),
+        clean::SelfTy => f.write_str("Self"),
         clean::Type::Path { ref path } => {
             // Paths like `T::Output` and `Self::Output` should be rendered with all segments.
             let did = path.def_id();
@@ -1451,29 +1453,22 @@ impl clean::FnDecl {
 
         let last_input_index = self.inputs.values.len().checked_sub(1);
         for (i, input) in self.inputs.values.iter().enumerate() {
-            if let Some(selfty) = input.to_self() {
+            if let Some(selfty) = input.to_receiver() {
                 match selfty {
-                    clean::SelfValue => {
+                    clean::SelfTy => {
                         write!(f, "self")?;
                     }
-                    clean::SelfBorrowed(Some(ref lt), mutability) => {
-                        write!(
-                            f,
-                            "{amp}{lifetime} {mutability}self",
-                            lifetime = lt.print(),
-                            mutability = mutability.print_with_space(),
-                        )?;
+                    clean::BorrowedRef { lifetime, mutability, type_: box clean::SelfTy } => {
+                        write!(f, "{amp}")?;
+                        match lifetime {
+                            Some(lt) => write!(f, "{lt} ", lt = lt.print())?,
+                            None => {}
+                        }
+                        write!(f, "{mutability}self", mutability = mutability.print_with_space())?;
                     }
-                    clean::SelfBorrowed(None, mutability) => {
-                        write!(
-                            f,
-                            "{amp}{mutability}self",
-                            mutability = mutability.print_with_space(),
-                        )?;
-                    }
-                    clean::SelfExplicit(ref typ) => {
+                    _ => {
                         write!(f, "self: ")?;
-                        typ.print(cx).fmt(f)?;
+                        selfty.print(cx).fmt(f)?;
                     }
                 }
             } else {

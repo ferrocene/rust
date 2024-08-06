@@ -184,7 +184,6 @@ impl<'tcx> FormatRenderer<'tcx> for JsonRenderer<'tcx> {
                 | types::ItemEnum::TraitAlias(_)
                 | types::ItemEnum::Impl(_)
                 | types::ItemEnum::TypeAlias(_)
-                | types::ItemEnum::OpaqueTy(_)
                 | types::ItemEnum::Constant { .. }
                 | types::ItemEnum::Static(_)
                 | types::ItemEnum::ForeignType
@@ -217,13 +216,7 @@ impl<'tcx> FormatRenderer<'tcx> for JsonRenderer<'tcx> {
     fn after_krate(&mut self) -> Result<(), Error> {
         debug!("Done with crate");
 
-        debug!("Adding Primitive impls");
-        for primitive in Rc::clone(&self.cache).primitive_locations.values() {
-            self.get_impls(*primitive);
-        }
-
         let e = ExternalCrate { crate_num: LOCAL_CRATE };
-
         let index = (*self.index).clone().into_inner();
 
         debug!("Constructing Output");

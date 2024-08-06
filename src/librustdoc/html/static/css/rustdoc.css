@@ -586,12 +586,15 @@ ul.block, .block li {
 }
 
 .sidebar h2 {
+	text-wrap: balance;
 	overflow-wrap: anywhere;
 	padding: 0;
 	margin: 0.7rem 0;
 }
 
 .sidebar h3 {
+	text-wrap: balance;
+	overflow-wrap: anywhere;
 	font-size: 1.125rem; /* 18px */
 	padding: 0;
 	margin: 0;
@@ -927,7 +930,7 @@ a.doc-anchor {
 	left: -17px;
 	/* We add this padding so that when the cursor moves from the heading's text to the anchor,
 	   the anchor doesn't disappear. */
-	padding-right: 5px;
+	padding-right: 10px;
 	/* And this padding is used to make the anchor larger and easier to click on. */
 	padding-left: 3px;
 }
@@ -1474,7 +1477,20 @@ a.test-arrow:hover {
 .example-wrap:hover > .test-arrow {
 	padding: 2px 7px;
 }
-.example-wrap:hover > .test-arrow, .example-wrap:hover > .button-holder {
+/*
+On iPad, the ":hover" state sticks around, making things work not greatly. Do work around
+it, we move it into this media query. More information can be found at:
+https://css-tricks.com/solving-sticky-hover-states-with-media-hover-hover/
+
+However, using `@media (hover: hover)` makes this rule never to be applied in GUI tests, so
+instead, we check that it's not a "finger" cursor.
+*/
+@media not (pointer: coarse) {
+	.example-wrap:hover > .test-arrow, .example-wrap:hover > .button-holder {
+		visibility: visible;
+	}
+}
+.example-wrap .button-holder.keep-visible {
 	visibility: visible;
 }
 .example-wrap .button-holder .copy-button {
@@ -2222,7 +2238,7 @@ in src-script.js and main.js
 		width: 33%;
 	}
 	.item-table > li > div {
-		word-break: break-all;
+		overflow-wrap: anywhere;
 	}
 }
 

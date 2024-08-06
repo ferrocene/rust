@@ -100,6 +100,10 @@ passes_continue_labeled_block =
     .label = labeled blocks cannot be `continue`'d
     .block_label = labeled block the `continue` points to
 
+passes_coroutine_on_non_closure =
+    attribute should be applied to closures
+    .label = not a closure
+
 passes_coverage_not_fn_or_closure =
     attribute should be applied to a function definition or closure
     .label = not a function or closure
@@ -541,6 +545,10 @@ passes_only_has_effect_on =
         [implementation_block] implementation blocks
         *[unspecified] (unspecified--this is a compiler bug)
     }
+
+passes_optimize_not_fn_or_closure =
+    attribute should be applied to function or closure
+    .label = not a function or closure
 
 passes_outer_crate_level_attr =
     crate-level attribute should be an inner attribute: add an exclamation mark: `#![foo]`

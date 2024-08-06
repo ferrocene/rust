@@ -30,7 +30,7 @@ mod tests;
 
 mod context;
 mod print_item;
-mod sidebar;
+pub(crate) mod sidebar;
 mod span_map;
 mod type_layout;
 mod write_shared;
@@ -58,7 +58,7 @@ use serde::{Serialize, Serializer};
 
 pub(crate) use self::context::*;
 pub(crate) use self::span_map::{collect_spans_and_sources, LinkFromSrc};
-use crate::clean::{self, ItemId, RenderedLink, SelfTy};
+use crate::clean::{self, ItemId, RenderedLink};
 use crate::error::Error;
 use crate::formats::cache::Cache;
 use crate::formats::item_type::ItemType;
@@ -332,7 +332,6 @@ struct AllTypes {
     macros: FxHashSet<ItemEntry>,
     functions: FxHashSet<ItemEntry>,
     type_aliases: FxHashSet<ItemEntry>,
-    opaque_tys: FxHashSet<ItemEntry>,
     statics: FxHashSet<ItemEntry>,
     constants: FxHashSet<ItemEntry>,
     attribute_macros: FxHashSet<ItemEntry>,
@@ -352,7 +351,6 @@ impl AllTypes {
             macros: new_set(100),
             functions: new_set(100),
             type_aliases: new_set(100),
-            opaque_tys: new_set(100),
             statics: new_set(100),
             constants: new_set(100),
             attribute_macros: new_set(100),
@@ -376,7 +374,6 @@ impl AllTypes {
                 ItemType::Macro => self.macros.insert(ItemEntry::new(new_url, name)),
                 ItemType::Function => self.functions.insert(ItemEntry::new(new_url, name)),
                 ItemType::TypeAlias => self.type_aliases.insert(ItemEntry::new(new_url, name)),
-                ItemType::OpaqueTy => self.opaque_tys.insert(ItemEntry::new(new_url, name)),
                 ItemType::Static => self.statics.insert(ItemEntry::new(new_url, name)),
                 ItemType::Constant => self.constants.insert(ItemEntry::new(new_url, name)),
                 ItemType::ProcAttribute => {
@@ -415,9 +412,6 @@ impl AllTypes {
         }
         if !self.type_aliases.is_empty() {
             sections.insert(ItemSection::TypeAliases);
-        }
-        if !self.opaque_tys.is_empty() {
-            sections.insert(ItemSection::OpaqueTypes);
         }
         if !self.statics.is_empty() {
             sections.insert(ItemSection::Statics);
@@ -472,7 +466,6 @@ impl AllTypes {
         print_entries(f, &self.functions, ItemSection::Functions);
         print_entries(f, &self.type_aliases, ItemSection::TypeAliases);
         print_entries(f, &self.trait_aliases, ItemSection::TraitAliases);
-        print_entries(f, &self.opaque_tys, ItemSection::OpaqueTypes);
         print_entries(f, &self.statics, ItemSection::Statics);
         print_entries(f, &self.constants, ItemSection::Constants);
     }
@@ -1379,21 +1372,20 @@ fn render_deref_methods(
 
 fn should_render_item(item: &clean::Item, deref_mut_: bool, tcx: TyCtxt<'_>) -> bool {
     let self_type_opt = match *item.kind {
-        clean::MethodItem(ref method, _) => method.decl.self_type(),
-        clean::TyMethodItem(ref method) => method.decl.self_type(),
+        clean::MethodItem(ref method, _) => method.decl.receiver_type(),
+        clean::TyMethodItem(ref method) => method.decl.receiver_type(),
         _ => None,
     };
 
     if let Some(self_ty) = self_type_opt {
-        let (by_mut_ref, by_box, by_value) = match self_ty {
-            SelfTy::SelfBorrowed(_, mutability)
-            | SelfTy::SelfExplicit(clean::BorrowedRef { mutability, .. }) => {
+        let (by_mut_ref, by_box, by_value) = match *self_ty {
+            clean::Type::BorrowedRef { mutability, .. } => {
                 (mutability == Mutability::Mut, false, false)
             }
-            SelfTy::SelfExplicit(clean::Type::Path { path }) => {
+            clean::Type::Path { ref path } => {
                 (false, Some(path.def_id()) == tcx.lang_items().owned_box(), false)
             }
-            SelfTy::SelfValue => (false, false, true),
+            clean::Type::SelfTy => (false, false, true),
             _ => (false, false, false),
         };
 
@@ -2175,7 +2167,6 @@ pub(crate) enum ItemSection {
     AssociatedConstants,
     ForeignTypes,
     Keywords,
-    OpaqueTypes,
     AttributeMacros,
     DeriveMacros,
     TraitAliases,
@@ -2208,7 +2199,6 @@ impl ItemSection {
             AssociatedConstants,
             ForeignTypes,
             Keywords,
-            OpaqueTypes,
             AttributeMacros,
             DeriveMacros,
             TraitAliases,
@@ -2238,7 +2228,6 @@ impl ItemSection {
             Self::AssociatedConstants => "associated-consts",
             Self::ForeignTypes => "foreign-types",
             Self::Keywords => "keywords",
-            Self::OpaqueTypes => "opaque-types",
             Self::AttributeMacros => "attributes",
             Self::DeriveMacros => "derives",
             Self::TraitAliases => "trait-aliases",
@@ -2268,7 +2257,6 @@ impl ItemSection {
             Self::AssociatedConstants => "Associated Constants",
             Self::ForeignTypes => "Foreign Types",
             Self::Keywords => "Keywords",
-            Self::OpaqueTypes => "Opaque Types",
             Self::AttributeMacros => "Attribute Macros",
             Self::DeriveMacros => "Derive Macros",
             Self::TraitAliases => "Trait Aliases",
@@ -2299,7 +2287,6 @@ fn item_ty_to_section(ty: ItemType) -> ItemSection {
         ItemType::AssocConst => ItemSection::AssociatedConstants,
         ItemType::ForeignType => ItemSection::ForeignTypes,
         ItemType::Keyword => ItemSection::Keywords,
-        ItemType::OpaqueTy => ItemSection::OpaqueTypes,
         ItemType::ProcAttribute => ItemSection::AttributeMacros,
         ItemType::ProcDerive => ItemSection::DeriveMacros,
         ItemType::TraitAlias => ItemSection::TraitAliases,

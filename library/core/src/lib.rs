@@ -103,9 +103,11 @@
 #![deny(ffi_unwind_calls)]
 // Do not check link redundancy on bootstraping phase
 #![allow(rustdoc::redundant_explicit_links)]
+#![warn(rustdoc::unescaped_backticks)]
 //
 // Library features:
 // tidy-alphabetical-start
+#![cfg_attr(bootstrap, feature(offset_of_nested))]
 #![feature(array_ptr_get)]
 #![feature(asm_experimental_arch)]
 #![feature(char_indices_offset)]
@@ -171,7 +173,6 @@
 #![feature(isqrt)]
 #![feature(link_cfg)]
 #![feature(offset_of_enum)]
-#![feature(offset_of_nested)]
 #![feature(panic_internals)]
 #![feature(ptr_alignment_type)]
 #![feature(ptr_metadata)]
@@ -191,8 +192,6 @@
 //
 // Language features:
 // tidy-alphabetical-start
-#![cfg_attr(bootstrap, feature(c_unwind))]
-#![cfg_attr(bootstrap, feature(effects))]
 #![feature(abi_unadjusted)]
 #![feature(adt_const_params)]
 #![feature(allow_internal_unsafe)]
@@ -261,9 +260,11 @@
 #![feature(powerpc_target_feature)]
 #![feature(riscv_target_feature)]
 #![feature(rtm_target_feature)]
+#![feature(sha512_sm_x86)]
 #![feature(sse4a_target_feature)]
 #![feature(tbm_target_feature)]
 #![feature(wasm_target_feature)]
+#![feature(x86_amx_intrinsics)]
 // tidy-alphabetical-end
 
 // allow using `core::` in intra-doc links

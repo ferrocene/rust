@@ -12,6 +12,7 @@ use rustc_span::{Span, DUMMY_SP};
 use crate::bounds::Bounds;
 use crate::collect::ItemCtxt;
 use crate::constrained_generic_params as cgp;
+use crate::delegation::inherit_predicates_for_delegation_item;
 use crate::hir_ty_lowering::{HirTyLowerer, OnlySelfBounds, PredicateFilter, RegionInferReason};
 
 /// Returns a list of all type predicates (explicit and implicit) for the definition with
@@ -142,6 +143,16 @@ fn gather_explicit_predicates_of(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::Gen
 
             ItemKind::Trait(_, _, _, self_bounds, ..) | ItemKind::TraitAlias(_, self_bounds) => {
                 is_trait = Some(self_bounds);
+            }
+
+            ItemKind::Fn(sig, _, _) => {
+                // For a delegation item inherit predicates from callee.
+                if let Some(sig_id) = sig.decl.opt_delegation_sig_id()
+                    && let Some(predicates) =
+                        inherit_predicates_for_delegation_item(tcx, def_id, sig_id)
+                {
+                    return predicates;
+                }
             }
             _ => {}
         }

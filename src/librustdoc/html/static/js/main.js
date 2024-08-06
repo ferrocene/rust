@@ -568,7 +568,6 @@ function preLoadCss(cssUrl) {
             //block("associatedconstant", "associated-consts", "Associated Constants");
             block("foreigntype", "foreign-types", "Foreign Types");
             block("keyword", "keywords", "Keywords");
-            block("opaque", "opaque-types", "Opaque Types");
             block("attr", "attributes", "Attribute Macros");
             block("derive", "derives", "Derive Macros");
             block("traitalias", "trait-aliases", "Trait Aliases");
@@ -1115,8 +1114,7 @@ function preLoadCss(cssUrl) {
         wrapper.style.left = 0;
         wrapper.style.right = "auto";
         wrapper.style.visibility = "hidden";
-        const body = document.getElementsByTagName("body")[0];
-        body.appendChild(wrapper);
+        document.body.appendChild(wrapper);
         const wrapperPos = wrapper.getBoundingClientRect();
         // offset so that the arrow points at the center of the "(i)"
         const finalPos = pos.left + window.scrollX - wrapperPos.width + 24;
@@ -1235,8 +1233,7 @@ function preLoadCss(cssUrl) {
                 }
                 window.CURRENT_TOOLTIP_ELEMENT.TOOLTIP_BASE.TOOLTIP_FORCE_VISIBLE = false;
             }
-            const body = document.getElementsByTagName("body")[0];
-            body.removeChild(window.CURRENT_TOOLTIP_ELEMENT);
+            document.body.removeChild(window.CURRENT_TOOLTIP_ELEMENT);
             clearTooltipHoverTimeout(window.CURRENT_TOOLTIP_ELEMENT);
             window.CURRENT_TOOLTIP_ELEMENT = null;
         }
@@ -1829,13 +1826,21 @@ href="https://doc.rust-lang.org/${channel}/rustdoc/read-documentation/search.htm
         copyContentToClipboard(codeElem.textContent);
     }
 
-    function addCopyButton(event) {
+    function getExampleWrap(event) {
         let elem = event.target;
         while (!hasClass(elem, "example-wrap")) {
             elem = elem.parentElement;
-            if (elem.tagName === "body" || hasClass(elem, "docblock")) {
-                return;
+            if (elem === document.body || hasClass(elem, "docblock")) {
+                return null;
             }
+        }
+        return elem;
+    }
+
+    function addCopyButton(event) {
+        const elem = getExampleWrap(event);
+        if (elem === null) {
+            return;
         }
         // Since the button will be added, no need to keep this listener around.
         elem.removeEventListener("mouseover", addCopyButton);
@@ -1858,7 +1863,20 @@ href="https://doc.rust-lang.org/${channel}/rustdoc/read-documentation/search.htm
         parent.appendChild(copyButton);
     }
 
+    function showHideCodeExampleButtons(event) {
+        const elem = getExampleWrap(event);
+        if (elem === null) {
+            return;
+        }
+        const buttons = elem.querySelector(".button-holder");
+        if (buttons === null) {
+            return;
+        }
+        buttons.classList.toggle("keep-visible");
+    }
+
     onEachLazy(document.querySelectorAll(".docblock .example-wrap"), elem => {
         elem.addEventListener("mouseover", addCopyButton);
+        elem.addEventListener("click", showHideCodeExampleButtons);
     });
 }());

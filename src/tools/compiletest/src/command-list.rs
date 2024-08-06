@@ -18,6 +18,7 @@ const KNOWN_DIRECTIVE_NAMES: &[&str] = &[
     "check-test-line-numbers-match",
     "compare-output-lines-by-subset",
     "compile-flags",
+    "doc-flags",
     "dont-check-compiler-stderr",
     "dont-check-compiler-stdout",
     "dont-check-failure-status",
@@ -117,6 +118,7 @@ const KNOWN_DIRECTIVE_NAMES: &[&str] = &[
     "ignore-watchos",
     "ignore-windows",
     "ignore-windows-gnu",
+    "ignore-windows-msvc",
     "ignore-x32",
     "ignore-x86",
     "ignore-x86_64",
@@ -225,6 +227,7 @@ const KNOWN_DIRECTIVE_NAMES: &[&str] = &[
     "should-ice",
     "stderr-per-bitwidth",
     "test-mir-pass",
+    "unique-doc-out-dir",
     "unset-exec-env",
     "unset-rustc-env",
     // Used by the tidy check `unknown_revision`.

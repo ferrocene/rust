@@ -746,6 +746,10 @@ impl<'hir> Map<'hir> {
         }
     }
 
+    pub fn opt_delegation_sig_id(self, def_id: LocalDefId) -> Option<DefId> {
+        self.tcx.opt_hir_owner_node(def_id)?.fn_decl()?.opt_delegation_sig_id()
+    }
+
     #[inline]
     fn opt_ident(self, id: HirId) -> Option<Ident> {
         match self.tcx.hir_node(id) {

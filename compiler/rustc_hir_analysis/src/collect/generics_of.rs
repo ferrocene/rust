@@ -10,6 +10,7 @@ use rustc_session::lint;
 use rustc_span::symbol::{kw, Symbol};
 use rustc_span::Span;
 
+use crate::delegation::inherit_generics_for_delegation_item;
 use crate::middle::resolve_bound_vars as rbv;
 
 #[instrument(level = "debug", skip(tcx), ret)]
@@ -226,6 +227,16 @@ pub(super) fn generics_of(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::Generics {
                 // inherit the generics of the item.
                 Some(parent.to_def_id())
             }
+            ItemKind::Fn(sig, _, _) => {
+                // For a delegation item inherit generics from callee.
+                if let Some(sig_id) = sig.decl.opt_delegation_sig_id()
+                    && let Some(generics) =
+                        inherit_generics_for_delegation_item(tcx, def_id, sig_id)
+                {
+                    return generics;
+                }
+                None
+            }
             _ => None,
         },
         _ => None,
@@ -327,8 +338,6 @@ pub(super) fn generics_of(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::Generics {
             if default.is_some() {
                 match allow_defaults {
                     Defaults::Allowed => {}
-                    Defaults::FutureCompatDisallowed
-                        if tcx.features().default_type_parameter_fallback => {}
                     Defaults::FutureCompatDisallowed => {
                         tcx.node_span_lint(
                             lint::builtin::INVALID_TYPE_PARAM_DEFAULT,
