@@ -1,6 +1,7 @@
 // Regression test of #43913.
 
 //@ run-rustfix
+//@ edition: ..2021
 
 #![feature(trait_alias)]
 #![allow(bare_trait_objects, dead_code)]

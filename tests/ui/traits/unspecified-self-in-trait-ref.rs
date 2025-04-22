@@ -1,3 +1,5 @@
+//@ edition: ..2021
+
 pub trait Foo<A=Self> {
     fn foo(&self);
 }
