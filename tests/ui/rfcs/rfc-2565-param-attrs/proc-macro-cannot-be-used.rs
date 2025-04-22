@@ -8,7 +8,7 @@ use ident_mac::id;
 
 struct W(u8);
 
-extern "C" { fn ffi(#[id] arg1: i32, #[id] ...); }
+extern "C" { fn ffi(#[id] arg1: i32, #[id] _: ...); }
 //~^ ERROR expected non-macro attribute, found attribute macro
 //~| ERROR expected non-macro attribute, found attribute macro
 
@@ -54,7 +54,7 @@ trait A {
     fn trait3<'a>(#[id] &'a mut self, #[id] arg1: u8);
     //~^ ERROR expected non-macro attribute, found attribute macro
     //~| ERROR expected non-macro attribute, found attribute macro
-    fn trait4<'a>(#[id] self: Box<Self>, #[id] arg1: u8, #[id] Vec<u8>);
+    fn trait4<'a>(#[id] self: Box<Self>, #[id] arg1: u8, #[id] _: Vec<u8>);
     //~^ ERROR expected non-macro attribute, found attribute macro
     //~| ERROR expected non-macro attribute, found attribute macro
     //~| ERROR expected non-macro attribute, found attribute macro
