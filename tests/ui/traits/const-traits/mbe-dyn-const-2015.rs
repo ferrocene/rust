@@ -2,6 +2,7 @@
 // See also `mbe-const-trait-bound-theoretical-regression.rs`.
 
 //@ check-pass
+//@ edition: 2015
 
 macro_rules! check {
     ($ty:ty) => { compile_error!("ty"); };

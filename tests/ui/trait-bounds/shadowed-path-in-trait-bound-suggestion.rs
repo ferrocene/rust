@@ -1,4 +1,5 @@
 //@ run-rustfix
+//@ edition: 2015
 #![allow(non_snake_case)]
 mod A {
     pub trait Trait {}
