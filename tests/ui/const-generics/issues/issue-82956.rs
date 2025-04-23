@@ -1,3 +1,4 @@
+//@ normalize-stderr: "and [0-9]+ other candidates" -> "and NORMALIZED other candidates"
 #![feature(generic_const_exprs)]
 #![allow(incomplete_features)]
 
