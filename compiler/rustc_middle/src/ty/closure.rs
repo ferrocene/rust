@@ -304,6 +304,12 @@ pub fn place_to_string_for_capture<'tcx>(tcx: TyCtxt<'tcx>, place: &HirPlace<'tc
         _ => bug!("Capture_information should only contain upvars"),
     };
 
+    // Before edition 2021 precise capturing is not available: don't show precise capturing
+    // information in diagnostics when normalizing edition differences.
+    if tcx.sess.opts.unstable_opts.ui_testing_normalize_editions {
+        return curr_string;
+    }
+
     for (i, proj) in place.projections.iter().enumerate() {
         match proj.kind {
             HirProjectionKind::Deref => {
