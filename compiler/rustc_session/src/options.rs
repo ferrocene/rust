@@ -2578,6 +2578,8 @@ written to standard error output)"),
         "emit runtime checks for Undefined Behavior (default: -Cdebug-assertions)"),
     ui_testing: bool = (false, parse_bool, [UNTRACKED],
         "emit compiler diagnostics in a form suitable for UI testing (default: no)"),
+    ui_testing_normalize_editions: bool = (false, parse_bool, [UNTRACKED],
+        "normalize some edition differences in compiler diagnostics"),
     uninit_const_chunk_threshold: usize = (16, parse_number, [TRACKED],
         "allow generating const initializers with mixed init/uninit chunks, \
         and set the maximum number of chunks for which this is allowed (default: 16)"),

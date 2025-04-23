@@ -1242,7 +1242,10 @@ impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
                     && filter_fn(res)
                 {
                     // create the path
-                    let mut segms = if lookup_ident.span.at_least_rust_2018() {
+                    let mut segms = if lookup_ident.span.at_least_rust_2018()
+                        && !(this.tcx.sess.opts.unstable_opts.ui_testing_normalize_editions
+                            && (crate_path.len() == 1 && crate_path[0].ident.name == kw::Crate))
+                    {
                         // crate-local absolute paths start with `crate::` in edition 2018
                         // FIXME: may also be stabilized for Rust 2015 (Issues #45477, #44660)
                         crate_path.clone()

@@ -631,6 +631,13 @@ impl TestProps {
             }
         }
 
+        // When no explicit edition is provided we assume the test does not depend on
+        // edition-specific behavior. We thus normalize diagnostics to reduce edition differences.
+        if !has_edition {
+            // The flag is added at the start, since flags from //@ compile-flags must be last.
+            self.compile_flags.insert(0, "-Zui-testing-normalize-editions".into());
+        }
+
         if let (Some(edition), false) = (&config.edition, has_edition) {
             // The edition is added at the start, since flags from //@compile-flags must be passed
             // to rustc last.
