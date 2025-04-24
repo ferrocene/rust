@@ -60,7 +60,7 @@ impl<'a> Obj for Test<'a> { }
 impl<'a> Drop for Test<'a> {
     fn drop(&mut self) {
         for e in &self.test.v.v {
-            assert!(e.0, e.1);
+            assert!(e.0, "{}", e.1);
         }
     }
 }
