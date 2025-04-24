@@ -1,3 +1,4 @@
+//@ normalize-stderr: "\(Rust 20\d\d\)" -> "(Rust 2015)"
 #![deny(rust_2024_compatibility)]
 
 #[no_mangle]
