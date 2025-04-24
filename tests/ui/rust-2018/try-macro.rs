@@ -1,4 +1,5 @@
 // Test that `try!` macros are rewritten.
+//@ edition: 2015
 
 //@ run-rustfix
 //@ check-pass
