@@ -1,3 +1,4 @@
+//@ normalize-stderr: "\(Rust 20\d\d\)" -> "(Rust 2015)"
 //@ run-rustfix
 
 #![deny(deprecated_safe_2024)]
