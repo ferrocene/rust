@@ -13,4 +13,3 @@ LL | #![warn(rust_2021_prelude_collisions)]
    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: 1 warning emitted
-
