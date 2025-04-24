@@ -24,7 +24,7 @@ checker!(attr_inherent_issue_64682, "fn inherent5(#[a1] #[a2] arg1: u8, #[a3] ar
 checker!(attr_trait_1, "fn trait1(#[a1] self, #[a2] arg1: u8);");
 checker!(attr_trait_2, "fn trait2(#[a1] &self, #[a2] arg1: u8);");
 checker!(attr_trait_3, "fn trait3<'a>(#[a1] &'a mut self, #[a2] arg1: u8);");
-checker!(attr_trait_4, r#"fn trait4<'a>(#[a1] self: Box<Self>, #[a2] arg1: u8, #[a3] Vec<u8>);"#);
+checker!(attr_trait_4, r#"fn trait4<'a>(#[a1] self: Box<Self>, #[a2] arg1: u8, #[a3] _: Vec<u8>);"#);
 checker!(attr_trait_issue_64682, "fn trait5(#[a1] #[a2] arg1: u8, #[a3] arg2: u8);");
 checker!(rename_params, r#"impl Foo
 {
