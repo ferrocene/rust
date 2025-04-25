@@ -13,7 +13,7 @@ mod bar {
     struct S(i32);
     fn f() {
         let s = S(0);
-        ::foo::m!(s, 0);
+        crate::foo::m!(s, 0);
     }
 }
 

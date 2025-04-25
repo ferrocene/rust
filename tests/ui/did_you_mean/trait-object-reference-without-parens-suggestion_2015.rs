@@ -1,4 +1,4 @@
-//@ edition: 2015
+//@ edition:2015
 #![allow(bare_trait_objects)]
 
 fn main() {

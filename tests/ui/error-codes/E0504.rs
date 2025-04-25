@@ -7,7 +7,7 @@ fn main() {
     let fancy_ref = &fancy_num;
 
     let x = move || { //~ ERROR E0505
-        println!("child function: {}", fancy_num.num);
+        println!("child function: {}", { fancy_num }.num);
     };
 
     x();

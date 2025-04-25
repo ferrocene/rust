@@ -1,0 +1,31 @@
+error: expected one of `:`, `@`, or `|`, found `)`
+  --> $DIR/future-incompatible-lint-group.rs:10:12
+   |
+LL |     fn f(u8) {}
+   |            ^ expected one of `:`, `@`, or `|`
+   |
+   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+help: if this is a `self` type, give it a parameter name
+   |
+LL |     fn f(self: u8) {}
+   |          +++++
+help: if this is a parameter name, give it a type
+   |
+LL |     fn f(u8: TypeName) {}
+   |            ++++++++++
+help: if this is a type, explicitly ignore the parameter name
+   |
+LL |     fn f(_: u8) {}
+   |          ++
+
+error: this attribute can only be applied at the crate level
+  --> $DIR/future-incompatible-lint-group.rs:17:12
+   |
+LL |     #![doc(test(some_test))]
+   |            ^^^^^^^^^^^^^^^
+   |
+   = note: read <https://doc.rust-lang.org/nightly/rustdoc/the-doc-attribute.html#at-the-crate-level> for more information
+   = note: `#[deny(invalid_doc_attributes)]` on by default
+
+error: aborting due to 2 previous errors
+

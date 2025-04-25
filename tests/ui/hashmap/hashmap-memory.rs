@@ -55,7 +55,7 @@ mod map_reduce {
         }
 
         let ctrl_clone = ctrl.clone();
-        ::map(input, Box::new(|a,b| emit(&mut intermediates, ctrl.clone(), a, b)));
+        crate::map(input, Box::new(|a,b| emit(&mut intermediates, ctrl.clone(), a, b)));
         ctrl_clone.send(ctrl_proto::mapper_done).unwrap();
     }
 

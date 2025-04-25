@@ -15,7 +15,7 @@ fn f<T: std::fmt::Display>(y: T) {
     let foo = Foo { x: "x" };
 
     let c = to_fn_once(use || {
-        println!("{} {}", foo.x, y);
+        println!("{} {}", {foo}.x, y);
     });
 
     c();

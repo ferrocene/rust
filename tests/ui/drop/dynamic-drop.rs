@@ -176,7 +176,7 @@ fn vec_simple(a: &Allocator) {
 fn coroutine(a: &Allocator, run_count: usize) {
     assert!(run_count < 4);
 
-    let mut gen = #[coroutine] || {
+    let mut coro = #[coroutine] || {
         (a.alloc(),
          yield a.alloc(),
          a.alloc(),
@@ -184,7 +184,7 @@ fn coroutine(a: &Allocator, run_count: usize) {
          );
     };
     for _ in 0..run_count {
-        Pin::new(&mut gen).resume(());
+        Pin::new(&mut coro).resume(());
     }
 }
 
@@ -431,7 +431,7 @@ fn run_test<F>(mut f: F)
         let alloc = &alloc;
         let f = panic::AssertUnwindSafe(&mut f);
         let result = panic::catch_unwind(move || {
-            f.0(alloc);
+            {f}.0(alloc);
         });
         match result {
             Ok(..) => panic!("test executed {} ops but now {}",

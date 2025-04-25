@@ -1,0 +1,45 @@
+error: ambiguous `+` in a type
+  --> $DIR/trait-object-reference-without-parens-suggestion_2018.rs:4:13
+   |
+LL |     let _: &dyn Copy + 'static;
+   |             ^^^^^^^^^^^^^^^^^^
+   |
+help: try adding parentheses
+   |
+LL |     let _: &(dyn Copy + 'static);
+   |             +                  +
+
+error: ambiguous `+` in a type
+  --> $DIR/trait-object-reference-without-parens-suggestion_2018.rs:6:21
+   |
+LL |     let _: &'static dyn Copy + 'static;
+   |                     ^^^^^^^^^^^^^^^^^^
+   |
+help: try adding parentheses
+   |
+LL |     let _: &'static (dyn Copy + 'static);
+   |                     +                  +
+
+error[E0038]: the trait `Copy` is not dyn compatible
+  --> $DIR/trait-object-reference-without-parens-suggestion_2018.rs:4:17
+   |
+LL |     let _: &dyn Copy + 'static;
+   |                 ^^^^ `Copy` is not dyn compatible
+   |
+   = note: the trait is not dyn compatible because it requires `Self: Sized`
+   = note: for a trait to be dyn compatible it needs to allow building a vtable
+           for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>
+
+error[E0038]: the trait `Copy` is not dyn compatible
+  --> $DIR/trait-object-reference-without-parens-suggestion_2018.rs:6:25
+   |
+LL |     let _: &'static dyn Copy + 'static;
+   |                         ^^^^ `Copy` is not dyn compatible
+   |
+   = note: the trait is not dyn compatible because it requires `Self: Sized`
+   = note: for a trait to be dyn compatible it needs to allow building a vtable
+           for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>
+
+error: aborting due to 4 previous errors
+
+For more information about this error, try `rustc --explain E0038`.
