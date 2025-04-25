@@ -1,3 +1,6 @@
+//@ revisions: edition2015 edition2018
+//@ [edition2015] edition: 2015
+//@ [edition2018] edition: 2018..
 mod foo {
     extern crate core;
 }
@@ -17,7 +20,7 @@ mod bar {
 }
 
 mod baz {
-    pub use bar::*;
+    pub use crate::bar::*;
     use self::core::cell; // Check that public extern crates are glob imported
 }
 

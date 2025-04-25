@@ -1,3 +1,6 @@
+//@ revisions: edition2015 edition2018
+//@ [edition2015] edition: 2015
+//@ [edition2018] edition: 2018..
 #![allow(unused, bare_trait_objects)]
 #[repr(align(256))]
 struct A {
@@ -18,7 +21,8 @@ fn foo(x: dyn Foo) { //~ ERROR [E0277]
     x.foo()
 }
 
-fn bar(x: Foo) { //~ ERROR [E0277]
+#[cfg(edition2015)]
+fn bar(x: Foo) { //[edition2015]~ ERROR [E0277]
     x.foo()
 }
 

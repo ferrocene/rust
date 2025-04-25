@@ -10,7 +10,7 @@ macro m($S:ident, $x:ident) {
 mod foo {
     struct S { x: i32 }
 
-    fn f() { ::m!(S, x); }
+    fn f() { crate::m!(S, x); }
 }
 
 fn main() {}

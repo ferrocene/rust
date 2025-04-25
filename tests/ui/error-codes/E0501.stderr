@@ -1,5 +1,5 @@
-error[E0501]: cannot borrow `*a` as mutable because previous closure requires unique access
-  --> $DIR/E0501.rs:14:23
+error[E0501]: cannot borrow `a` as mutable because previous closure requires unique access
+  --> $DIR/E0501.rs:15:23
    |
 LL |     let bar = || {
    |               -- closure construction occurs here
@@ -12,8 +12,8 @@ LL |     outside_closure_1(a);
 LL |     drop(bar);
    |          --- first borrow later used here
 
-error[E0501]: cannot borrow `*a` as immutable because previous closure requires unique access
-  --> $DIR/E0501.rs:17:23
+error[E0501]: cannot borrow `a` as immutable because previous closure requires unique access
+  --> $DIR/E0501.rs:18:23
    |
 LL |     let bar = || {
    |               -- closure construction occurs here
