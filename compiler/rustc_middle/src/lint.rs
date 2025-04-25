@@ -379,7 +379,11 @@ pub fn lint_level(
                     "this will change its meaning in a future release!".to_owned()
                 }
                 FutureIncompatibilityReason::EditionError(edition) => {
-                    let current_edition = sess.edition();
+                    let current_edition = if sess.opts.unstable_opts.ui_testing {
+                        "YYYY".to_string()
+                    } else {
+                        sess.edition().to_string()
+                    };
                     format!(
                         "this is accepted in the current edition (Rust {current_edition}) but is a hard error in Rust {edition}!"
                     )

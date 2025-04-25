@@ -10,7 +10,7 @@ warning: type annotations needed
 LL |     std::ptr::from_ref(num).cast_mut().as_deref();
    |                             ^^^^^^^^
    |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2018!
+   = warning: this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2018!
    = note: for more information, see issue #46906 <https://github.com/rust-lang/rust/issues/46906>
    = note: `#[warn(tyvar_behind_raw_pointer)]` on by default
 
@@ -20,7 +20,7 @@ warning: type annotations needed
 LL |     std::ptr::from_ref(num).cast_mut().as_deref();
    |                                        ^^^^^^^^
    |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2018!
+   = warning: this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2018!
    = note: for more information, see issue #46906 <https://github.com/rust-lang/rust/issues/46906>
 
 error[E0599]: no method named `as_deref` found for raw pointer `*mut _` in the current scope

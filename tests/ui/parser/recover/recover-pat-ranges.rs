@@ -20,7 +20,7 @@ fn main() {
         //~| error: expected a pattern range bound, found an expression
         //~| error: range pattern bounds cannot have parentheses
         //~| warning: `...` range patterns are deprecated
-        //~| warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+        //~| warning: this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2021!
         0.x()..="y".z() => (),
         //~^ error: expected a pattern range bound, found an expression
         //~| error: expected a pattern range bound, found an expression

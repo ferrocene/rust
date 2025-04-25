@@ -6,5 +6,5 @@ fn call_this<F>(f: F) : Fn(&str) + call_that {}
 //~| ERROR cannot find trait `call_that` in this scope
 //[new]~| ERROR expected a type, found a trait
 //[old]~| WARN trait objects without an explicit `dyn` are deprecated
-//[old]~| WARN this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+//[old]~| WARN this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2021!
 fn main() {}
