@@ -9,7 +9,7 @@ mod bar {
     pub use self::glob::*;
 
     pub mod glob {
-        use foo;
+        use crate::foo;
     }
 }
 
