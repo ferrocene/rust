@@ -12,7 +12,7 @@ impl<T> Meow for T {}
 fn main() {
     core::pin::pin!(async {}).poll(&mut context());
     //[e2021]~^ ERROR trait method `poll` will become ambiguous in Rust 2024
-    //[e2021]~| WARN this is accepted in the current edition (Rust 2021) but is a hard error in Rust 2024!
+    //[e2021]~| WARN this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2024!
 }
 
 fn context() -> core::task::Context<'static> {

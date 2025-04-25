@@ -4,7 +4,7 @@ warning: trait objects without an explicit `dyn` are deprecated
 LL | trait B { fn f(a: A) -> A; }
    |                   ^
    |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+   = warning: this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2021!
    = note: for more information, see <https://doc.rust-lang.org/nightly/edition-guide/rust-2021/warnings-promoted-to-error.html>
    = note: `#[warn(bare_trait_objects)]` on by default
 help: if this is a dyn-compatible trait, use `dyn`
@@ -18,7 +18,7 @@ warning: trait objects without an explicit `dyn` are deprecated
 LL | trait B { fn f(a: A) -> A; }
    |                         ^
    |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+   = warning: this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2021!
    = note: for more information, see <https://doc.rust-lang.org/nightly/edition-guide/rust-2021/warnings-promoted-to-error.html>
 help: if this is a dyn-compatible trait, use `dyn`
    |
@@ -31,7 +31,7 @@ warning: trait objects without an explicit `dyn` are deprecated
 LL | trait A { fn g(b: B) -> B; }
    |                   ^
    |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+   = warning: this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2021!
    = note: for more information, see <https://doc.rust-lang.org/nightly/edition-guide/rust-2021/warnings-promoted-to-error.html>
 help: if this is a dyn-compatible trait, use `dyn`
    |
@@ -44,7 +44,7 @@ warning: trait objects without an explicit `dyn` are deprecated
 LL | trait A { fn g(b: B) -> B; }
    |                         ^
    |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+   = warning: this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2021!
    = note: for more information, see <https://doc.rust-lang.org/nightly/edition-guide/rust-2021/warnings-promoted-to-error.html>
 help: if this is a dyn-compatible trait, use `dyn`
    |
@@ -57,7 +57,7 @@ warning: trait objects without an explicit `dyn` are deprecated
 LL | trait B { fn f(a: A) -> A; }
    |                   ^
    |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+   = warning: this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2021!
    = note: for more information, see <https://doc.rust-lang.org/nightly/edition-guide/rust-2021/warnings-promoted-to-error.html>
    = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: if this is a dyn-compatible trait, use `dyn`
@@ -94,7 +94,7 @@ warning: trait objects without an explicit `dyn` are deprecated
 LL | trait A { fn g(b: B) -> B; }
    |                   ^
    |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+   = warning: this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2021!
    = note: for more information, see <https://doc.rust-lang.org/nightly/edition-guide/rust-2021/warnings-promoted-to-error.html>
    = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: if this is a dyn-compatible trait, use `dyn`
