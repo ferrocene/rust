@@ -98,34 +98,35 @@ fn lol() {
 
 mod foo {
     fn test() {
+
         crate::bar::A::foo();
         crate::bar::A::bar();        //~ ERROR: associated function `bar` is private
         crate::bar::A.foo2();
         crate::bar::baz::A::foo();   //~ ERROR: module `baz` is private
         crate::bar::baz::A::bar();   //~ ERROR: module `baz` is private
-                                     //~^ ERROR: associated function `bar` is private
+                                      //~^ ERROR: associated function `bar` is private
         crate::bar::baz::A.foo2();   //~ ERROR: module `baz` is private
         crate::bar::baz::A.bar2();   //~ ERROR: module `baz` is private
-                                //~^ ERROR: method `bar2` is private
+                                     //~^ ERROR: method `bar2` is private
 
         let _: isize =
-        crate::bar::B::foo();        //~ ERROR: trait `B` is private
-        crate::lol();
+        ::bar::B::foo();        //~ ERROR: trait `B` is private
+        ::lol();
 
-        crate::bar::Enum::Pub;
+        ::bar::Enum::Pub;
 
         unsafe {
-            crate::bar::epriv(); //~ ERROR: function `epriv` is private
-            crate::bar::epub();
+            ::bar::epriv(); //~ ERROR: function `epriv` is private
+            ::bar::epub();
         }
 
-        crate::bar::foo();
-        crate::bar::bar();
+        ::bar::foo();
+        ::bar::bar();
 
-        crate::bar::gpub();
+        ::bar::gpub();
 
-        crate::bar::baz::foo(); //~ ERROR: module `baz` is private
-        crate::bar::baz::bar(); //~ ERROR: module `baz` is private
+        ::bar::baz::foo(); //~ ERROR: module `baz` is private
+        ::bar::baz::bar(); //~ ERROR: module `baz` is private
     }
 
     fn test2() {
@@ -154,7 +155,7 @@ mod foo {
         bar::bar();
     }
 
-    impl crate::bar::B for f32 { fn foo() -> f32 { 1.0 } }
+    impl ::bar::B for f32 { fn foo() -> f32 { 1.0 } }
     //~^ ERROR: trait `B` is private
 }
 
