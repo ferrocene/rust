@@ -8,7 +8,7 @@ mod foo {
     }
 
     fn f() {
-        use foo::bar::S;
+        use crate::foo::bar::S;
         S { x: 0 }; // ok
     }
 }

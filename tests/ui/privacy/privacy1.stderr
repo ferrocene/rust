@@ -1,8 +1,8 @@
 error[E0603]: module `baz` is private
-  --> $DIR/privacy1.rs:132:18
+  --> $DIR/privacy1.rs:132:25
    |
-LL |         use bar::baz::{foo, bar};
-   |                  ^^^ private module
+LL |         use crate::bar::baz::{foo, bar};
+   |                         ^^^ private module
    |
 note: the module `baz` is defined here
   --> $DIR/privacy1.rs:50:5
@@ -11,10 +11,10 @@ LL |     mod baz {
    |     ^^^^^^^
 
 error[E0603]: module `baz` is private
-  --> $DIR/privacy1.rs:132:18
+  --> $DIR/privacy1.rs:132:25
    |
-LL |         use bar::baz::{foo, bar};
-   |                  ^^^ private module
+LL |         use crate::bar::baz::{foo, bar};
+   |                         ^^^ private module
    |
 note: the module `baz` is defined here
   --> $DIR/privacy1.rs:50:5
@@ -24,10 +24,10 @@ LL |     mod baz {
    = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error[E0603]: module `baz` is private
-  --> $DIR/privacy1.rs:141:18
+  --> $DIR/privacy1.rs:141:25
    |
-LL |         use bar::baz;
-   |                  ^^^ private module
+LL |         use crate::bar::baz;
+   |                         ^^^ private module
    |
 note: the module `baz` is defined here
   --> $DIR/privacy1.rs:50:5

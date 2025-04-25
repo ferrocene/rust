@@ -103,7 +103,7 @@ mod foo {
         crate::bar::A.foo2();
         crate::bar::baz::A::foo();   //~ ERROR: module `baz` is private
         crate::bar::baz::A::bar();   //~ ERROR: module `baz` is private
-                                //~^ ERROR: associated function `bar` is private
+                                     //~^ ERROR: associated function `bar` is private
         crate::bar::baz::A.foo2();   //~ ERROR: module `baz` is private
         crate::bar::baz::A.bar2();   //~ ERROR: module `baz` is private
                                 //~^ ERROR: method `bar2` is private
@@ -129,7 +129,7 @@ mod foo {
     }
 
     fn test2() {
-        use bar::baz::{foo, bar};
+        use crate::bar::baz::{foo, bar};
         //~^ ERROR: module `baz` is private
         //~| ERROR: module `baz` is private
 
@@ -138,18 +138,18 @@ mod foo {
     }
 
     fn test3() {
-        use bar::baz;
+        use crate::bar::baz;
         //~^ ERROR: module `baz` is private
     }
 
     fn test4() {
-        use bar::{foo, bar};
+        use crate::bar::{foo, bar};
         foo();
         bar();
     }
 
     fn test5() {
-        use bar;
+        use crate::bar;
         bar::foo();
         bar::bar();
     }
