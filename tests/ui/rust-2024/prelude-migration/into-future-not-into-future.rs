@@ -18,5 +18,5 @@ fn main() {
     // this.
     Cat.into_future();
     //[e2021]~^ ERROR trait method `into_future` will become ambiguous in Rust 2024
-    //[e2021]~| WARN this is accepted in the current edition (Rust 2021) but is a hard error in Rust 2024!
+    //[e2021]~| WARN this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2024!
 }
