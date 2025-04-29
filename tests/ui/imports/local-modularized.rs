@@ -1,3 +1,5 @@
+// ::exported does not imply crate::exported in edition 2018+
+//@ edition: 2015
 //@ build-pass (FIXME(62277): could be check-pass?)
 
 #[macro_export(local_inner_macros)]

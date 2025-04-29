@@ -1,3 +1,5 @@
+//@ edition: 2015
+
 #![no_std]
 
 extern crate core; //~ ERROR: the name `core` is defined multiple times
