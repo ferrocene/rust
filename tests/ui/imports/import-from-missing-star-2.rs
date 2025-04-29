@@ -1,3 +1,6 @@
+//@ revisions: edition2015 edition2021
+//@[edition2015] edition: 2015
+//@[edition2021] edition: 2021
 mod foo {
     use spam::*; //~ ERROR unresolved import `spam` [E0432]
 }

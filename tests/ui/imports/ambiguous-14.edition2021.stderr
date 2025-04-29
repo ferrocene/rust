@@ -1,0 +1,35 @@
+error[E0432]: unresolved import `a`
+  --> $DIR/ambiguous-14.rs:16:13
+   |
+LL |     pub use a::*;
+   |             ^ help: a similar path exists: `crate::a`
+   |
+   = note: `use` statements changed in Rust 2018; read more at <https://doc.rust-lang.org/edition-guide/rust-2018/module-system/path-clarity.html>
+
+error[E0432]: unresolved import `b`
+  --> $DIR/ambiguous-14.rs:18:13
+   |
+LL |     pub use b::*;
+   |             ^ help: a similar path exists: `crate::b`
+   |
+   = note: `use` statements changed in Rust 2018; read more at <https://doc.rust-lang.org/edition-guide/rust-2018/module-system/path-clarity.html>
+
+error[E0432]: unresolved import `a`
+  --> $DIR/ambiguous-14.rs:23:13
+   |
+LL |     pub use a::*;
+   |             ^ help: a similar path exists: `crate::a`
+   |
+   = note: `use` statements changed in Rust 2018; read more at <https://doc.rust-lang.org/edition-guide/rust-2018/module-system/path-clarity.html>
+
+error[E0432]: unresolved import `f`
+  --> $DIR/ambiguous-14.rs:25:13
+   |
+LL |     pub use f::*;
+   |             ^ help: a similar path exists: `crate::f`
+   |
+   = note: `use` statements changed in Rust 2018; read more at <https://doc.rust-lang.org/edition-guide/rust-2018/module-system/path-clarity.html>
+
+error: aborting due to 4 previous errors
+
+For more information about this error, try `rustc --explain E0432`.
