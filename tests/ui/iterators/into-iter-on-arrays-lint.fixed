@@ -1,3 +1,4 @@
+//@ edition: 2015..2018
 //@ run-pass
 //@ run-rustfix
 //@ rustfix-only-machine-applicable

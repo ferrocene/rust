@@ -2,6 +2,8 @@
 // allowed in module and cap-lints set to warn
 //@ compile-flags: --cap-lints warn  --force-warn rust-2021-compatibility
 //@ check-pass
+//@ edition: 2015..2018
+//@ normalize-stderr: "\(Rust 20\d\d\)" -> "(Rust 2015)"
 #![allow(ellipsis_inclusive_range_patterns)]
 
 pub fn f() -> bool {

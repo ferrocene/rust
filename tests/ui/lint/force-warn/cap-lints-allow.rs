@@ -2,6 +2,7 @@
 // set to allow
 //@ compile-flags: --cap-lints allow  --force-warn bare_trait_objects
 //@ check-pass
+//@ edition: 2015..2018
 
 pub trait SomeTrait {}
 

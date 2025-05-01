@@ -1,5 +1,6 @@
 //@ check-pass
 //@ run-rustfix
+//@ edition: 2015..2018
 
 #![warn(ellipsis_inclusive_range_patterns)]
 

@@ -1,4 +1,5 @@
 // Tests that lint levels can be set for early lints.
+//@ edition: 2015..2018
 #![allow(non_camel_case_types, unsafe_code, while_true, unused_parens)]
 
 // The following is a check of the lints used here to verify they do not warn

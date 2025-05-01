@@ -1,4 +1,4 @@
-//@ edition: 2015
+//@ edition: 2015..2018
 #![feature(associated_type_defaults)]
 
 trait Assoc {
@@ -15,7 +15,7 @@ fn main() {
     Dyn::func();
     //~^ WARN trait objects without an explicit `dyn` are deprecated
     //~| WARN this is accepted in the current edition
-    ::Dyn::func();
+    crate::Dyn::func();
     //~^ WARN trait objects without an explicit `dyn` are deprecated
     //~| WARN this is accepted in the current edition
     Dyn::CONST;
