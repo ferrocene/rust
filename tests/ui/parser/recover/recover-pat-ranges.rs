@@ -1,3 +1,6 @@
+//@ edition: 2015..2018
+//@ normalize-stderr: "\(Rust 20\d\d\)" -> "2015"
+
 fn main() {
     match -1 {
         0..=1 => (),
