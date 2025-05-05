@@ -10,7 +10,7 @@ mod foo {
     }
 }
 mod bar {
-    pub use foo::zed::baz;
+    pub use crate::foo::zed::baz;
     pub mod foo {
         pub mod zed {}
     }
