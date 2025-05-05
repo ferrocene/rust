@@ -1,3 +1,6 @@
+//@ revisions: edition2015 edition2021
+//@[edition2015] edition: 2015
+//@[edition2021] edition: 2021
 //! A simple test for testing many permutations of allowedness of
 //! impl Trait
 #![feature(impl_trait_in_fn_trait_return)]
