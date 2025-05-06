@@ -1,4 +1,5 @@
 //@ run-rustfix
+//@ edition: 2015
 
 extern crate std;
 fn main() {}
