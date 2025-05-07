@@ -5,13 +5,13 @@ pub mod a {
 
 }
 pub mod b {
-    use a::A;
+    use crate::a::A;
 
     pub struct B;
     impl A for B { fn foo(&self) {} }
 
     pub mod c {
-        use b::B;
+        use crate::b::B;
 
         fn foo(b: &B) {
             b.foo(); //~ ERROR: no method named `foo` found

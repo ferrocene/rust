@@ -1,3 +1,6 @@
+//@revisions: edition2015 edition2021
+//@[edition2015] edition:2015
+//@[edition2021] edition:2021
 //@ ignore-sgx std::os::fortanix_sgx::usercalls::raw::Result changes compiler suggestions
 
 use foo::MyEnum::Result;
@@ -18,8 +21,8 @@ mod foo {
 }
 
 mod bar {
-    use foo::MyEnum::Result;
-    use foo;
+    use crate::foo::MyEnum::Result;
+    use crate::foo;
 
     fn new() -> Result<foo::MyEnum, String> {
         //~^ ERROR expected type, found variant `Result`
