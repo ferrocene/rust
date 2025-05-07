@@ -2,7 +2,7 @@
 
 // Very
 
-// sensitive
+#[derive(Debug)] // sensitive
 pub struct BytePos(pub u32);
 
 // to particular
@@ -12,6 +12,6 @@ pub struct BytePos(pub u32);
 fn main() {
     let x = BytePos(1);
 
-    assert!(x, x);
+    assert!(x, "{:?}", x);
     //~^ ERROR cannot apply unary operator `!` to type `BytePos`
 }
