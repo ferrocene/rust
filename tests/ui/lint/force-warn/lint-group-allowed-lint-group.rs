@@ -2,7 +2,7 @@
 // $LINT_GROUP being allowed in module
 //@ compile-flags: --force-warn rust_2018_idioms
 //@ check-pass
-
+//@ edition: 2015..2018
 #![allow(rust_2018_idioms)]
 
 pub trait SomeTrait {}
