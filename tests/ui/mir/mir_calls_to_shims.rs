@@ -23,6 +23,8 @@ fn test_fn_ptr<T>(mut t: T)
 fn assert_panics<F>(f: F) where F: FnOnce() {
     let f = panic::AssertUnwindSafe(f);
     let result = panic::catch_unwind(move || {
+        // be sure we capture `f` as a whole instead of just `f.0` on edition 2021 or newer.
+        let f = f;
         f.0()
     });
     if let Ok(..) = result {
