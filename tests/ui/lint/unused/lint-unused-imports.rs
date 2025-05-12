@@ -12,16 +12,16 @@ use std::fmt::{};
 use std::option::Option::{Some, None};
 //~^ ERROR unused imports: `None` and `Some`
 
-use test::A;       //~ ERROR unused import: `test::A`
+use crate::test::A;       //~ ERROR unused import: `crate::test::A`
 // Be sure that if we just bring some methods into scope that they're also
 // counted as being used.
-use test::B;
+use crate::test::B;
 // But only when actually used: do not get confused by the method with the same name.
-use test::B2; //~ ERROR unused import: `test::B2`
+use crate::test::B2; //~ ERROR unused import: `crate::test::B2`
 
 // Make sure this import is warned about when at least one of its imported names
 // is unused
-use test2::{foo, bar}; //~ ERROR unused import: `bar`
+use crate::test2::{foo, bar}; //~ ERROR unused import: `bar`
 
 mod test2 {
     pub fn foo() {}
@@ -48,8 +48,8 @@ pub mod bar {
     pub struct Square;
 
     pub mod c {
-        use foo::Point;
-        use foo::Square; //~ ERROR unused import: `foo::Square`
+        use crate::foo::Point;
+        use crate::foo::Square; //~ ERROR unused import: `crate::foo::Square`
         pub fn cc(_p: Point) -> super::Square {
             fn f() -> super::Square {
                 super::Square
@@ -74,7 +74,7 @@ fn g() {
 // cf. issue #35135.
 #[allow(unused_variables)]
 fn h() {
-    use test2::foo; //~ ERROR unused import: `test2::foo`
+    use crate::test2::foo; //~ ERROR unused import: `crate::test2::foo`
     let foo = 0;
 }
 
@@ -83,6 +83,6 @@ fn main() {
     let mut a = 3;
     let mut b = 4;
     swap(&mut a, &mut b);
-    test::C.b();
+    crate::test::C.b();
     foo();
 }
