@@ -1,4 +1,5 @@
 //@ check-pass
+//@ edition: 2015
 #![warn(redundant_imports)]
 
 
