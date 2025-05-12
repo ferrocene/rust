@@ -1,4 +1,5 @@
 //@ check-pass
+//@ edition: 2015..2018
 
 fn expect_early_pass_lints() {
     #[expect(while_true)]
