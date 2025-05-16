@@ -1,3 +1,7 @@
+//@ revisions: preedition2021 postedition2021
+//@[preedition2021] edition:2015..2018
+//@[postedition2021] edition:2021..
+
 #![allow(unused_macros)]
 
 macro_rules! errors_everywhere {
