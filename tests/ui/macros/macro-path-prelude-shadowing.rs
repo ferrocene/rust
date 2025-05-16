@@ -1,4 +1,7 @@
 //@ aux-build:macro-in-other-crate.rs
+//@ revisions: edition2015 postedition2015
+//@[edition2015] edition:2015
+//@[postedition2015] edition:2015..
 
 #![feature(decl_macro)]
 
@@ -24,7 +27,7 @@ mod m2 {
 }
 
 mod m3 {
-    use m2::*; // glob-import user-defined `std`
+    use crate::m2::*; // glob-import user-defined `std`
     fn check() {
         std::panic!(); //~ ERROR `std` is ambiguous
     }
