@@ -1,3 +1,7 @@
+//@revisions: preedition2021 postedition2021
+//@[preedition2021] edition: ..2018
+//@[postedition2021] edition: 2021..
+
 fn main() {}
 
 struct U;
@@ -41,7 +45,9 @@ fn closure() {
         let (ref _x0, _x1, _) = tup;
     };
     let c2 = || {
-        //~^ ERROR use of moved value
+        //[preedition2021]~^ ERROR use of moved value
+        //[postedition2021]~^^ ERROR cannot borrow `tup.0` as mutable because it is also borrowed as immutable
+        //[postedition2021]~^^^ ERROR use of partially moved value: `tup`
         let (ref mut _x0, _, _x2) = tup;
     };
     drop(c1);
