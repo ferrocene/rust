@@ -17,7 +17,7 @@ mod b {
     use a;
 
     fn test_enum_struct_variant() {
-      let enum_struct_variant = ::a::get_enum_struct_variant();
+      let enum_struct_variant = crate::a::get_enum_struct_variant();
       match enum_struct_variant {
         a::Enum::EnumStructVariant { x, y, z } => {
         //~^ ERROR mismatched types
