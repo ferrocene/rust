@@ -1,15 +1,4 @@
 error[E0594]: cannot assign to `x`, as it is not declared as mutable
-  --> $DIR/closure-captures.rs:7:5
-   |
-LL |     x = 1;
-   |     ^^^^^ cannot assign
-   |
-help: consider changing this to be mutable
-   |
-LL | fn one_closure(mut x: i32) {
-   |                +++
-
-error[E0594]: cannot assign to `x`, as it is not declared as mutable
   --> $DIR/closure-captures.rs:9:5
    |
 LL |     x = 1;
@@ -21,7 +10,18 @@ LL | fn one_closure(mut x: i32) {
    |                +++
 
 error[E0594]: cannot assign to `x`, as it is not declared as mutable
-  --> $DIR/closure-captures.rs:15:9
+  --> $DIR/closure-captures.rs:11:5
+   |
+LL |     x = 1;
+   |     ^^^^^ cannot assign
+   |
+help: consider changing this to be mutable
+   |
+LL | fn one_closure(mut x: i32) {
+   |                +++
+
+error[E0594]: cannot assign to `x`, as it is not declared as mutable
+  --> $DIR/closure-captures.rs:17:9
    |
 LL |         x = 1;
    |         ^^^^^ cannot assign
@@ -32,7 +32,7 @@ LL | fn two_closures(mut x: i32) {
    |                 +++
 
 error[E0594]: cannot assign to `x`, as it is not declared as mutable
-  --> $DIR/closure-captures.rs:19:9
+  --> $DIR/closure-captures.rs:21:9
    |
 LL |         x = 1;
    |         ^^^^^ cannot assign
@@ -43,7 +43,7 @@ LL | fn two_closures(mut x: i32) {
    |                 +++
 
 error[E0596]: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/closure-captures.rs:27:9
+  --> $DIR/closure-captures.rs:29:9
    |
 LL | fn fn_ref<F: Fn()>(f: F) -> F { f }
    |                       - change this to accept `FnMut` instead of `Fn`
@@ -58,7 +58,7 @@ LL |          x = 1;}
    |          - mutable borrow occurs due to use of `x` in closure
 
 error[E0596]: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/closure-captures.rs:31:9
+  --> $DIR/closure-captures.rs:33:9
    |
 LL | fn fn_ref<F: Fn()>(f: F) -> F { f }
    |                       - change this to accept `FnMut` instead of `Fn`
@@ -73,7 +73,7 @@ LL |     x = 1;});
    |     - mutable borrow occurs due to use of `x` in closure
 
 error[E0594]: cannot assign to `x`, as it is not declared as mutable
-  --> $DIR/closure-captures.rs:39:10
+  --> $DIR/closure-captures.rs:41:10
    |
 LL |          x = 1;}
    |          ^^^^^ cannot assign
@@ -84,7 +84,7 @@ LL | fn two_closures_ref(mut x: i32) {
    |                     +++
 
 error[E0596]: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/closure-captures.rs:38:9
+  --> $DIR/closure-captures.rs:40:9
    |
 LL | fn fn_ref<F: Fn()>(f: F) -> F { f }
    |                       - change this to accept `FnMut` instead of `Fn`
@@ -99,7 +99,7 @@ LL |          x = 1;}
    |          - mutable borrow occurs due to use of `x` in closure
 
 error[E0594]: cannot assign to `x`, as it is not declared as mutable
-  --> $DIR/closure-captures.rs:43:5
+  --> $DIR/closure-captures.rs:45:5
    |
 LL |     x = 1;});
    |     ^^^^^ cannot assign
@@ -110,7 +110,7 @@ LL | fn two_closures_ref(mut x: i32) {
    |                     +++
 
 error[E0596]: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/closure-captures.rs:42:9
+  --> $DIR/closure-captures.rs:44:9
    |
 LL | fn fn_ref<F: Fn()>(f: F) -> F { f }
    |                       - change this to accept `FnMut` instead of `Fn`
@@ -125,7 +125,7 @@ LL |     x = 1;});
    |     - mutable borrow occurs due to use of `x` in closure
 
 error[E0596]: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/closure-captures.rs:48:9
+  --> $DIR/closure-captures.rs:50:9
    |
 LL | fn fn_ref<F: Fn()>(f: F) -> F { f }
    |                       - change this to accept `FnMut` instead of `Fn`
@@ -140,7 +140,7 @@ LL |         *x = 1;});
    |         -- mutable borrow occurs due to use of `x` in closure
 
 error[E0596]: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/closure-captures.rs:51:9
+  --> $DIR/closure-captures.rs:53:9
    |
 LL | fn fn_ref<F: Fn()>(f: F) -> F { f }
    |                       - change this to accept `FnMut` instead of `Fn`

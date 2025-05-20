@@ -1,3 +1,7 @@
+//@ revisions: preedition2021 postedition2021
+//@[preedition2021] edition: ..2018
+//@[postedition2021] edition: 2021..
+
 // Tests that two closures cannot simultaneously have mutable
 // and immutable access to the variable. Issue #6801.
 
@@ -10,7 +14,7 @@ fn a(x: &isize) {
     //~^ ERROR cannot borrow
     let mut c2 = || set(&mut *x);
     //~^ ERROR cannot borrow
-    //~| ERROR two closures require unique access to `x` at the same time
+    //[preedition2021]~| ERROR two closures require unique access to `x` at the same time
     c2(); c1();
 }
 

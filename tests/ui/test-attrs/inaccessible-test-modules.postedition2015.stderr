@@ -1,0 +1,9 @@
+error[E0432]: unresolved import `main`
+  --> $DIR/inaccessible-test-modules.rs:8:5
+   |
+LL | use main as x;
+   |     ^^^^^^^^^ no external crate `main`
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0432`.

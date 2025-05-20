@@ -1,4 +1,5 @@
 // Regression test for the ICE reported in issue #83471.
+//@ edition: 2015
 
 #![crate_type="lib"]
 #![feature(no_core)]

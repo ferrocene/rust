@@ -14,7 +14,7 @@ mod a {
 
 mod b {
   mod test {
-    use a;
+    use crate::a;
 
     fn test_enum_struct_variant() {
       let enum_struct_variant = crate::a::get_enum_struct_variant();

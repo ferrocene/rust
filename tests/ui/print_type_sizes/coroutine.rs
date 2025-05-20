@@ -1,6 +1,9 @@
 //@ compile-flags: -Z print-type-sizes --crate-type=lib
 //@ build-pass
 //@ ignore-pass
+//@revisions: preedition2021 postedition2021
+//@[preedition2021] edition: ..2021
+//@[postedition2021] edition: 2021..
 
 #![feature(coroutines, coroutine_trait)]
 

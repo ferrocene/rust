@@ -1,3 +1,4 @@
+//@ normalize-stderr: "m::S" -> "crate::m::S"
 //@ aux-build:privacy-struct-ctor.rs
 
 extern crate privacy_struct_ctor as xcrate;

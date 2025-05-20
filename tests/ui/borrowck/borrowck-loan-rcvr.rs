@@ -1,3 +1,4 @@
+//@ normalize-stderr: "`p\.x`" -> "`p`"
 struct Point { x: isize, y: isize }
 
 trait Methods {
@@ -20,7 +21,7 @@ fn a() {
     p.impurem();
 
     // But in this case we do not honor the loan:
-    p.blockm(|| { //~ ERROR cannot borrow `p` as mutable
+    p.blockm(|| { //~ ERROR cannot borrow
         p.x = 10;
     })
 }

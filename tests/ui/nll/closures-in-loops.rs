@@ -1,5 +1,6 @@
 // Test messages where a closure capture conflicts with itself because it's in
 // a loop.
+//@ normalize-stderr: " `\*x` " -> " `x` "
 
 fn repreated_move(x: String) {
     for i in 0..10 {

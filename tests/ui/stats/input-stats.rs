@@ -1,3 +1,8 @@
+//@ revisions: edition2015 edition2018to2021 edition2024
+//@[edition2015] edition: 2015
+//@[edition2018to2021] edition: 2018..2021
+//@[edition2024] edition: 2024
+
 //@ check-pass
 //@ compile-flags: -Zinput-stats
 //@ only-64bit
@@ -23,7 +28,7 @@ use std::arch::asm;
 use std::fmt::Debug;
 use std::ffi::c_void;
 
-extern "C" { fn f(p: *mut c_void); }
+unsafe extern "C" { fn f(p: *mut c_void); }
 
 /// An enum.
 enum E<'a, T: Copy> { A { t: T }, B(&'a u32) }

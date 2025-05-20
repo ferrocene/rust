@@ -1,6 +1,6 @@
-//@ revisions: edition2015 edition2018
+//@ revisions: edition2015 edition2021
 //@ [edition2015] edition: 2015
-//@ [edition2018] edition: 2018..
+//@ [edition2021] edition: 2021..
 //@ [edition2015] run-pass
 
 fn main() {
@@ -46,7 +46,7 @@ fn panic_with_single_argument_does_not_get_formatted() {
 
     #[allow(non_fmt_panics)]
     let msg = std::panic::catch_unwind(|| {
-        panic!("{foo}"); //[edition2018]~ cannot find value `foo` in this scope
+        panic!("{foo}"); //[edition2021]~ ERROR cannot find value `foo` in this scope
     })
     .unwrap_err();
 

@@ -1,4 +1,7 @@
 // check that accesses due to a closure capture give a special note
+//@ revisions: edition2021 postedition2021
+//@[edition2021] edition: 2015..2018
+//@[postedition2021] edition: 2021..
 
 fn closure_imm_capture_conflict(mut x: i32) {
     let r = &mut x;

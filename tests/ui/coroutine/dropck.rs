@@ -14,6 +14,7 @@ fn main() {
     || {
         // but the coroutine can use it to drop a `Ref<'a, i32>`.
         let _d = ref_.take();
+        //~^ ERROR `ref_` does not live long enough [E0597]
         yield;
     };
     Pin::new(&mut coro).resume(());

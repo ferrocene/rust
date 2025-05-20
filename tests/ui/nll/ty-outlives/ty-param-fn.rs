@@ -2,7 +2,7 @@
 
 use std::fmt::Debug;
 
-fn no_region<'a, T>(x: Box<T>) -> Box<Debug + 'a>
+fn no_region<'a, T>(x: Box<T>) -> Box<dyn Debug + 'a>
 where
     T: Debug,
 {
@@ -10,14 +10,14 @@ where
     //~^ ERROR the parameter type `T` may not live long enough
 }
 
-fn correct_region<'a, T>(x: Box<T>) -> Box<Debug + 'a>
+fn correct_region<'a, T>(x: Box<T>) -> Box<dyn Debug + 'a>
 where
     T: 'a + Debug,
 {
     x
 }
 
-fn wrong_region<'a, 'b, T>(x: Box<T>) -> Box<Debug + 'a>
+fn wrong_region<'a, 'b, T>(x: Box<T>) -> Box<dyn Debug + 'a>
 where
     T: 'b + Debug,
 {
@@ -25,7 +25,7 @@ where
     //~^ ERROR the parameter type `T` may not live long enough
 }
 
-fn outlives_region<'a, 'b, T>(x: Box<T>) -> Box<Debug + 'a>
+fn outlives_region<'a, 'b, T>(x: Box<T>) -> Box<dyn Debug + 'a>
 where
     T: 'b + Debug,
     'b: 'a,

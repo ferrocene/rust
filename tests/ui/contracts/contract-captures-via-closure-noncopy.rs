@@ -1,5 +1,7 @@
 //@ compile-flags: -Zcontract-checks=yes
-//@ edition: 2021..
+//@ revisions: preedition2021 postedition2021
+//@[preedition2021] edition: ..2018
+//@[postedition2021] edition: 2021..
 
 #![feature(contracts)]
 //~^ WARN the feature `contracts` is incomplete and may not be safe to use and/or cause compiler crashes [incomplete_features]
@@ -13,9 +15,10 @@ struct Baz {
 #[core::contracts::ensures({let old = x; move |ret:&Baz| ret.baz == old.baz*2 })]
 // Relevant thing is this:  ^^^^^^^^^^^
 // because we are capturing state that is non-Copy.
-//~^^^ ERROR trait bound `Baz: std::marker::Copy` is not satisfied
+//[preedition2021]~^^^ ERROR trait bound `Baz: std::marker::Copy` is not satisfied
 fn doubler(x: Baz) -> Baz {
     Baz { baz: x.baz + 10 }
+    //[postedition2021]~^ ERROR use of moved value: `x`
 }
 
 fn main() {

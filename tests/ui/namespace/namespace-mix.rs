@@ -1,4 +1,7 @@
 //@ aux-build:namespace-mix.rs
+//@ revisions: edition2015 postedition2015
+//@[edition2015] edition: 2015
+//@[postedition2015] edition: 2018..
 
 extern crate namespace_mix;
 use namespace_mix::*;
@@ -21,12 +24,12 @@ trait Impossible {}
 fn check<T: Impossible>(_: T) {}
 
 mod m1 {
-    pub use ::c::*;
-    pub type S = ::c::Item;
+    pub use crate::c::*;
+    pub type S = crate::c::Item;
 }
 mod m2 {
-    pub use ::c::*;
-    pub const S: ::c::Item = ::c::Item;
+    pub use crate::c::*;
+    pub const S: crate::c::Item = crate::c::Item;
 }
 
 fn f12() {
@@ -43,12 +46,12 @@ fn xf12() {
 }
 
 mod m3 {
-    pub use ::c::*;
-    pub type TS = ::c::Item;
+    pub use crate::c::*;
+    pub type TS = crate::c::Item;
 }
 mod m4 {
-    pub use ::c::*;
-    pub const TS: ::c::Item = ::c::Item;
+    pub use crate::c::*;
+    pub const TS: crate::c::Item = crate::c::Item;
 }
 
 fn f34() {
@@ -65,12 +68,12 @@ fn xf34() {
 }
 
 mod m5 {
-    pub use ::c::*;
-    pub type US = ::c::Item;
+    pub use crate::c::*;
+    pub type US = crate::c::Item;
 }
 mod m6 {
-    pub use ::c::*;
-    pub const US: ::c::Item = ::c::Item;
+    pub use crate::c::*;
+    pub const US: crate::c::Item = crate::c::Item;
 }
 
 fn f56() {
@@ -87,12 +90,12 @@ fn xf56() {
 }
 
 mod m7 {
-    pub use ::c::E::*;
-    pub type V = ::c::Item;
+    pub use crate::c::E::*;
+    pub type V =crate ::c::Item;
 }
 mod m8 {
-    pub use ::c::E::*;
-    pub const V: ::c::Item = ::c::Item;
+    pub use crate::c::E::*;
+    pub const V: crate::c::Item = crate::c::Item;
 }
 
 fn f78() {
@@ -109,12 +112,12 @@ fn xf78() {
 }
 
 mod m9 {
-    pub use ::c::E::*;
-    pub type TV = ::c::Item;
+    pub use crate::c::E::*;
+    pub type TV = crate::c::Item;
 }
 mod mA {
-    pub use ::c::E::*;
-    pub const TV: ::c::Item = ::c::Item;
+    pub use crate::c::E::*;
+    pub const TV: crate::c::Item = crate::c::Item;
 }
 
 fn f9A() {
@@ -131,12 +134,12 @@ fn xf9A() {
 }
 
 mod mB {
-    pub use ::c::E::*;
-    pub type UV = ::c::Item;
+    pub use crate::c::E::*;
+    pub type UV = crate::c::Item;
 }
 mod mC {
-    pub use ::c::E::*;
-    pub const UV: ::c::Item = ::c::Item;
+    pub use crate::c::E::*;
+    pub const UV: crate::c::Item = crate::c::Item;
 }
 
 fn fBC() {

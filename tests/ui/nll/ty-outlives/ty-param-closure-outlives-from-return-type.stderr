@@ -39,7 +39,7 @@ LL |     T: Debug + 'a,
 error[E0309]: the parameter type `T` may not live long enough
   --> $DIR/ty-param-closure-outlives-from-return-type.rs:41:5
    |
-LL | fn wrong_region<'a, 'b, T>(x: Box<T>) -> Box<Debug + 'a>
+LL | fn wrong_region<'a, 'b, T>(x: Box<T>) -> Box<dyn Debug + 'a>
    |                 -- the parameter type `T` must be valid for the lifetime `'a` as defined here...
 ...
 LL |     x

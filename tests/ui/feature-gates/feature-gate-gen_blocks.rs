@@ -14,7 +14,7 @@ fn test_gen() {
 fn test_async_gen() {
     async gen {};
     //[none]~^ ERROR expected one of `!`, `.`, `::`, `;`, `?`, `{`, `}`, or an operator, found `gen`
-    //[e2021]~^^ ERROR expected one of `move`, `use`, `|`, or `||`, found `gen`
+    //[e2021]~^^ ERROR expected one of `move`, `use`, `{`, `|`, or `||`, found `gen`
     //[e2024]~^^^ ERROR: gen blocks are experimental
     //[e2024]~| ERROR: type annotations needed
 }
@@ -28,6 +28,6 @@ fn foo() {
 
     async gen {};
     //[e2024]~^ ERROR: gen blocks are experimental
-    //[e2021]~^^ ERROR expected one of `move`, `use`, `|`, or `||`, found `gen`
+    //[e2021]~^^ ERROR expected one of `move`, `use`, `{`, `|`, or `||`, found `gen`
     //[none]~^^^ ERROR expected one of `!`, `.`, `::`, `;`, `?`, `{`, `}`, or an operator, found `gen`
 }

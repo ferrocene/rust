@@ -1,3 +1,7 @@
+//@revisions: preedition2021 postedition2021
+//@[preedition2021] edition: ..2018
+//@[postedition2021] edition: 2021..
+
 fn main() {
     struct S; // Not `Copy`.
 
@@ -28,15 +32,26 @@ fn main() {
 
     // Now we try to borrow and move the captures, which should result in errors...
     // ...for tuples:
-    drop(&tup0); //~ ERROR borrow of moved value: `tup0`
-    drop(&tup1); //~ ERROR borrow of moved value: `tup1`
-    drop(&tup2); //~ ERROR borrow of moved value: `tup2`
-    drop(&tup3); //~ ERROR borrow of moved value: `tup3`
+    drop(&tup0);
+    //[preedition2021]~^ ERROR borrow of moved value: `tup0`
+    //[postedition2021]~^^ ERROR borrow of partially moved value: `tup0`
+    drop(&tup1);
+    //[preedition2021]~^ ERROR borrow of moved value: `tup1`
+    //[postedition2021]~^^ ERROR borrow of partially moved value: `tup1`
+    drop(&tup2);
+    //[preedition2021]~^ ERROR borrow of moved value: `tup2`
+    //[postedition2021]~^^ ERROR borrow of partially moved value: `tup2`
+    drop(&tup3);
+    //[preedition2021]~^ ERROR borrow of moved value: `tup3`
+    //[postedition2021]~^^ ERROR borrow of partially moved value: `tup3`
+
     // Ostensibly this should compile.
     // However, because closures don't capture individual fields, which is changed in RFC 2229,
     // this won't compile because the entire product is moved into the closure.
     // The same applies to the array patterns below.
-    drop(&tup4.0); //~ ERROR borrow of moved value: `tup4`
+    drop(&tup4.0);
+    //[preedition2021]~^ ERROR borrow of moved value: `tup4`
+
     // ...for arrays:
     drop(&arr0); //~ ERROR borrow of moved value: `arr0`
     let [_, mov1, mov2, mov3, _] = &arr1; //~ ERROR borrow of moved value: `arr1`

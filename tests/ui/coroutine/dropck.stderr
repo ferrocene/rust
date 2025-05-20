@@ -15,6 +15,26 @@ LL | }
    |
    = note: values in a scope are dropped in the opposite order they are defined
 
-error: aborting due to 1 previous error
+error[E0597]: `ref_` does not live long enough
+  --> $DIR/dropck.rs:16:18
+   |
+LL |     let ref_ = Box::leak(Box::new(Some(cell.borrow_mut())));
+   |         ---- binding `ref_` declared here
+...
+LL |     || {
+   |     -- value captured here by coroutine
+LL |         // but the coroutine can use it to drop a `Ref<'a, i32>`.
+LL |         let _d = ref_.take();
+   |                  ^^^^ borrowed value does not live long enough
+...
+LL | }
+   | -
+   | |
+   | `ref_` dropped here while still borrowed
+   | borrow might be used here, when `coro` is dropped and runs the destructor for coroutine
+   |
+   = note: values in a scope are dropped in the opposite order they are defined
+
+error: aborting due to 2 previous errors
 
 For more information about this error, try `rustc --explain E0597`.
