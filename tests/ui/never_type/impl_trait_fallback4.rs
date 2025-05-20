@@ -1,3 +1,6 @@
+//@revisions: preedition2021 postedition2021
+//@[preedition2021] edition: ..2018
+//@[postedition2021] edition: 2021..
 #![feature(type_alias_impl_trait)]
 
 trait T {
