@@ -1,0 +1,34 @@
+error[E0432]: unresolved import `ambiguous`
+  --> $DIR/issue-107563-ambiguous-glob-reexports.rs:28:13
+   |
+LL |     pub use ambiguous::A;
+   |             ^^^^^^^^^ help: a similar path exists: `crate::ambiguous`
+   |
+   = note: `use` statements changed in Rust 2018; read more at <https://doc.rust-lang.org/edition-guide/rust-2018/module-system/path-clarity.html>
+
+error[E0432]: unresolved import `ambiguous`
+  --> $DIR/issue-107563-ambiguous-glob-reexports.rs:34:13
+   |
+LL |     pub use ambiguous::*;
+   |             ^^^^^^^^^ help: a similar path exists: `crate::ambiguous`
+   |
+   = note: `use` statements changed in Rust 2018; read more at <https://doc.rust-lang.org/edition-guide/rust-2018/module-system/path-clarity.html>
+
+error: ambiguous glob re-exports
+  --> $DIR/issue-107563-ambiguous-glob-reexports.rs:15:9
+   |
+LL | pub use foo::*;
+   |         ^^^^^^ the name `X` in the type namespace is first re-exported here
+LL |
+LL | pub use bar::*;
+   |         ------ but the name `X` in the type namespace is also re-exported here
+   |
+note: the lint level is defined here
+  --> $DIR/issue-107563-ambiguous-glob-reexports.rs:4:9
+   |
+LL | #![deny(ambiguous_glob_reexports)]
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: aborting due to 3 previous errors
+
+For more information about this error, try `rustc --explain E0432`.

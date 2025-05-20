@@ -12,16 +12,16 @@ use std::fmt::{};
 use std::option::Option::{Some, None};
 //~^ ERROR unused imports: `None` and `Some`
 
-use test::A;       //~ ERROR unused import: `test::A`
+use crate::test::A;       //~ ERROR unused import: `crate::test::A`
 // Be sure that if we just bring some methods into scope that they're also
 // counted as being used.
-use test::B;
+use crate::test::B;
 // But only when actually used: do not get confused by the method with the same name.
-use test::B2; //~ ERROR unused import: `test::B2`
+use crate::test::B2; //~ ERROR unused import: `crate::test::B2`
 
 // Make sure this import is warned about when at least one of its imported names
 // is unused
-use test2::{foo, bar}; //~ ERROR unused import: `bar`
+use crate::test2::{foo, bar}; //~ ERROR unused import: `bar`
 
 mod test2 {
     pub fn foo() {}

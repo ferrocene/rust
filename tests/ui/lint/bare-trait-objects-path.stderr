@@ -15,15 +15,15 @@ LL |     <dyn Dyn>::func();
 warning: trait objects without an explicit `dyn` are deprecated
   --> $DIR/bare-trait-objects-path.rs:18:5
    |
-LL |     ::Dyn::func();
-   |     ^^^^^
+LL |     crate::Dyn::func();
+   |     ^^^^^^^^^^
    |
    = warning: this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2021!
    = note: for more information, see <https://doc.rust-lang.org/nightly/edition-guide/rust-2021/warnings-promoted-to-error.html>
 help: if this is a dyn-compatible trait, use `dyn`
    |
-LL |     <dyn (::Dyn)>::func();
-   |     ++++++     ++
+LL |     <dyn crate::Dyn>::func();
+   |     ++++           +
 
 warning: trait objects without an explicit `dyn` are deprecated
   --> $DIR/bare-trait-objects-path.rs:21:5
@@ -44,7 +44,7 @@ warning: trait objects without an explicit `dyn` are deprecated
 LL |     let _: Dyn::Ty;
    |            ^^^
    |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+   = warning: this is accepted in the current edition (Rust YYYY) but is a hard error in Rust 2021!
    = note: for more information, see <https://doc.rust-lang.org/nightly/edition-guide/rust-2021/warnings-promoted-to-error.html>
 help: if this is a dyn-compatible trait, use `dyn`
    |

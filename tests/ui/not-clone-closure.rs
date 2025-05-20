@@ -1,3 +1,6 @@
+//@ edition: 2015..2018
+// Rust 2021 introduced Disjoint capture in closures
+
 //@compile-flags: --diagnostic-width=300
 // Check that closures do not implement `Clone` if their environment is not `Clone`.
 

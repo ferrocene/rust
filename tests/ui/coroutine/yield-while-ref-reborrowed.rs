@@ -1,3 +1,4 @@
+//@ normalize-stderr: "`\*x`" -> "`x`"
 #![feature(coroutines, coroutine_trait, stmt_expr_attributes)]
 
 use std::cell::Cell;

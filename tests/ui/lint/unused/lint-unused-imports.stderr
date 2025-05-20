@@ -16,17 +16,17 @@ error: unused imports: `None` and `Some`
 LL | use std::option::Option::{Some, None};
    |                           ^^^^  ^^^^
 
-error: unused import: `test::A`
+error: unused import: `crate::test::A`
   --> $DIR/lint-unused-imports.rs:15:5
    |
-LL | use test::A;
-   |     ^^^^^^^
+LL | use crate::test::A;
+   |     ^^^^^^^^^^^^^^
 
 error: unused import: `bar`
-  --> $DIR/lint-unused-imports.rs:24:18
+  --> $DIR/lint-unused-imports.rs:24:25
    |
-LL | use test2::{foo, bar};
-   |                  ^^^
+LL | use crate::test2::{foo, bar};
+   |                         ^^^
 
 error: unused import: `crate::foo::Square`
   --> $DIR/lint-unused-imports.rs:52:13
@@ -46,11 +46,11 @@ error: unused import: `crate::test2::foo`
 LL |     use crate::test2::foo;
    |         ^^^^^^^^^^^^^^^^^
 
-error: unused import: `test::B2`
+error: unused import: `crate::test::B2`
   --> $DIR/lint-unused-imports.rs:20:5
    |
-LL | use test::B2;
-   |     ^^^^^^^^
+LL | use crate::test::B2;
+   |     ^^^^^^^^^^^^^^^
 
 error: aborting due to 8 previous errors
 

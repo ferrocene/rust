@@ -1,0 +1,56 @@
+error: expected one of `!`, `(`, `...`, `..=`, `..`, `::`, `:`, `{`, or `|`, found `<`
+  --> $DIR/trait-impl-argument-difference-ice.rs:7:41
+   |
+LL |     extern "C" fn read_dword(Self::Assoc<'_>) -> u16;
+   |                                         ^ expected one of 9 possible tokens
+   |
+   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+help: explicitly ignore the parameter name
+   |
+LL |     extern "C" fn read_dword(_: Self::Assoc<'_>) -> u16;
+   |                              ++
+
+error[E0185]: method `read_dword` has a `&self` declaration in the impl, but not in the trait
+  --> $DIR/trait-impl-argument-difference-ice.rs:18:5
+   |
+LL |     extern "C" fn read_dword(Self::Assoc<'_>) -> u16;
+   |     ------------------------------------------------- trait method declared without `&self`
+...
+LL |     extern "C" fn read_dword(&'_ self) -> u16 {
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `&self` used in impl
+
+error[E0046]: not all trait items implemented, missing: `read_word`
+  --> $DIR/trait-impl-argument-difference-ice.rs:16:1
+   |
+LL |     extern "C" fn read_word(&mut self) -> u8;
+   |     ----------------------------------------- `read_word` from trait
+...
+LL | impl MemoryUnit for ROM {
+   | ^^^^^^^^^^^^^^^^^^^^^^^ missing `read_word` in implementation
+
+error[E0596]: cannot borrow `*self` as mutable, as it is behind a `&` reference
+  --> $DIR/trait-impl-argument-difference-ice.rs:20:19
+   |
+LL |         let a16 = self.read_word() as u16;
+   |                   ^^^^ `self` is a `&` reference, so the data it refers to cannot be borrowed as mutable
+   |
+help: consider changing this to be a mutable reference in the `impl` method and the `trait` definition
+   |
+LL |     extern "C" fn read_dword(&'_ mut self) -> u16 {
+   |                                  +++
+
+error[E0596]: cannot borrow `*self` as mutable, as it is behind a `&` reference
+  --> $DIR/trait-impl-argument-difference-ice.rs:22:19
+   |
+LL |         let b16 = self.read_word() as u16;
+   |                   ^^^^ `self` is a `&` reference, so the data it refers to cannot be borrowed as mutable
+   |
+help: consider changing this to be a mutable reference in the `impl` method and the `trait` definition
+   |
+LL |     extern "C" fn read_dword(&'_ mut self) -> u16 {
+   |                                  +++
+
+error: aborting due to 5 previous errors
+
+Some errors have detailed explanations: E0046, E0185, E0596.
+For more information about an error, try `rustc --explain E0046`.

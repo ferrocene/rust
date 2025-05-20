@@ -1,5 +1,6 @@
 #![deny(unused)]
 
+#[allow(unused)]
 extern crate proc_macro;
 use proc_macro::*;
 

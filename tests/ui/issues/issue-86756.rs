@@ -1,4 +1,5 @@
 //@ edition: 2015
+
 trait Foo<T, T = T> {}
 //~^ ERROR the name `T` is already used for a generic parameter in this item's generic parameters
 

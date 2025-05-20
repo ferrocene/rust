@@ -5,7 +5,7 @@
 pub struct Foo;
 
 mod bar {
-    use Foo;
+    use super::Foo;
 
     impl Foo {
         fn baz(&self) {}

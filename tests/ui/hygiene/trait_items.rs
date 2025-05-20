@@ -8,14 +8,14 @@ mod foo {
 }
 
 mod bar {
-    use foo::*;
+    use crate::foo::*;
     pub macro m() { ().f() }
-    fn f() { ::baz::m!(); }
+    fn f() { crate::baz::m!(); }
 }
 
 mod baz {
     pub macro m() { ().f() } //~ ERROR no method named `f` found
-    fn f() { ::bar::m!(); }
+    fn f() { crate::bar::m!(); }
 }
 
 fn main() {}

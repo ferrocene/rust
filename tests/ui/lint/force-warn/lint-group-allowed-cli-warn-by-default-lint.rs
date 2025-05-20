@@ -2,6 +2,7 @@
 // despite $LINT being allowed on command line
 //@ compile-flags: -A bare-trait-objects --force-warn rust-2018-idioms
 //@ check-pass
+//@ edition: 2015..2018
 
 pub trait SomeTrait {}
 

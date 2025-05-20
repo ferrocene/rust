@@ -1,4 +1,5 @@
 //@ run-rustfix
+//@ edition: .. 2018
 
 #![deny(rust_2021_incompatible_closure_captures)]
 //~^ NOTE lint level is defined here

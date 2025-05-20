@@ -1,4 +1,5 @@
 //@ run-rustfix
+//@ edition: 2015..2018
 //@ aux-build:or-pattern.rs
 
 #![deny(rust_2021_incompatible_or_patterns)]

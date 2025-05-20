@@ -1,3 +1,4 @@
+//@ edition: 2015..2018
 #![crate_type = "lib"]
 
 #[macro_export]

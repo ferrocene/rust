@@ -1,0 +1,36 @@
+error: unexpected `self` parameter in function
+  --> $DIR/error-recovery-mismatch.rs:14:29
+   |
+LL |     fn fold<T>(&self, _: T, &self._) {}
+   |                             ^^^^^ must be the first parameter of an associated function
+
+error: expected one of `:` or `|`, found `)`
+  --> $DIR/error-recovery-mismatch.rs:14:36
+   |
+LL |     fn fold<T>(&self, _: T, &self._) {}
+   |                                    ^ expected one of `:` or `|`
+   |
+   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+help: explicitly ignore the parameter name
+   |
+LL |     fn fold<T>(&self, _: T, &self._: _) {}
+   |                                   ++
+
+error: expected one of `)` or `,`, found `.`
+  --> $DIR/error-recovery-mismatch.rs:14:34
+   |
+LL |     fn fold<T>(&self, _: T, &self._) {}
+   |                                  ^
+   |                                  |
+   |                                  expected one of `)` or `,`
+   |                                  help: missing `,`
+
+error[E0415]: identifier `self` is bound more than once in this parameter list
+  --> $DIR/error-recovery-mismatch.rs:14:30
+   |
+LL |     fn fold<T>(&self, _: T, &self._) {}
+   |                              ^^^^ used as parameter more than once
+
+error: aborting due to 4 previous errors
+
+For more information about this error, try `rustc --explain E0415`.

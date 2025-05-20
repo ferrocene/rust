@@ -1,3 +1,4 @@
+//@ edition: 2015..2018
 //@ run-fail
 //@ error-pattern:panicked
 //@ error-pattern:Box<dyn Any>

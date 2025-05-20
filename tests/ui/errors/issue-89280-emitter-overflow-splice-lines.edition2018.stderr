@@ -1,0 +1,14 @@
+error: expected one of `:` or `|`, found `)`
+  --> $DIR/issue-89280-emitter-overflow-splice-lines.rs:10:6
+   |
+LL |     )) {}
+   |      ^ expected one of `:` or `|`
+   |
+   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+help: explicitly ignore the parameter name
+   |
+LL |     fn test(x: u32, _: (
+   |                     ++
+
+error: aborting due to 1 previous error
+

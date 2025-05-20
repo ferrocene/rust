@@ -1,3 +1,5 @@
+//@ edition: ..2021
+
 trait Foo {
     fn dummy(&self) {}
 }

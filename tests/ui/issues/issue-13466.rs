@@ -13,7 +13,7 @@ pub fn main() {
         //~| NOTE found enum `Result<_, _>`
         //~| NOTE expected `Option<{integer}>`, found `Result<_, _>`
 
-        Err(e) => panic!(e)
+        Err(e) => panic!("{}", e)
         //~^ ERROR mismatched types
         //~| NOTE expected enum `Option<{integer}>`
         //~| NOTE found enum `Result<_, _>`

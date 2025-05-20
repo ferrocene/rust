@@ -2,6 +2,7 @@
 // despite $LINT_GROUP (which contains $LINT) being allowed
 //@ compile-flags: --force-warn bare_trait_objects
 //@ check-pass
+//@ edition: 2015..2018
 
 #![allow(rust_2018_idioms)]
 

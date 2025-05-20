@@ -2,6 +2,7 @@
 #![allow(unused_variables)]
 #![allow(non_fmt_panics)]
 
+//@ edition: 2015..2018
 //@ run-fail
 //@ error-pattern:wooooo
 //@ needs-subprocess

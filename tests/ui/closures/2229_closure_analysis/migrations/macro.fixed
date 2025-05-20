@@ -1,5 +1,6 @@
 //@ edition: ..2021
 //@ run-rustfix
+//@ edition: .. 2018
 
 // See https://github.com/rust-lang/rust/issues/87955
 
