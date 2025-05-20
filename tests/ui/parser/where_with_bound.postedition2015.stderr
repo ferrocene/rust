@@ -1,0 +1,15 @@
+error: generic parameters on `where` clauses are reserved for future use
+  --> $DIR/where_with_bound.rs:5:19
+   |
+LL | fn foo<T>() where <T>::Item: ToString, T: Iterator { }
+   |                   ^^^ currently unsupported
+
+error[E0412]: cannot find crate `Item` in the list of imported crates
+  --> $DIR/where_with_bound.rs:5:24
+   |
+LL | fn foo<T>() where <T>::Item: ToString, T: Iterator { }
+   |                        ^^^^ not found in the list of imported crates
+
+error: aborting due to 2 previous errors
+
+For more information about this error, try `rustc --explain E0412`.
