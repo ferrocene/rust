@@ -1,3 +1,5 @@
+//@ edition: 2015
+
 #[macro_export]
 macro_rules! fancy_panic {
     () => {
