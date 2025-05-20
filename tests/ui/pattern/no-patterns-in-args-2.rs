@@ -1,4 +1,5 @@
 #![deny(patterns_in_fns_without_body)]
+//@ edition: 2015
 
 trait Tr {
     fn f1(mut arg: u8); //~ ERROR patterns aren't allowed in functions without bodies
