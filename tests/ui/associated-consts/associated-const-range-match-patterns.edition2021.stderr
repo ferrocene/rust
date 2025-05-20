@@ -1,0 +1,19 @@
+error[E0783]: `...` range patterns are deprecated
+  --> $DIR/associated-const-range-match-patterns.rs:19:9
+   |
+LL |         Foo::NUM ... 3 => true,
+   |         ^^^^^^^^^---^^
+   |                  |
+   |                  help: use `..=` for an inclusive range
+
+error[E0783]: `...` range patterns are deprecated
+  --> $DIR/associated-const-range-match-patterns.rs:23:9
+   |
+LL |         -1 ... <Foo as HasNum>::NUM => true,
+   |         ^^^---^^^^^^^^^^^^^^^^^^^^^
+   |            |
+   |            help: use `..=` for an inclusive range
+
+error: aborting due to 2 previous errors
+
+For more information about this error, try `rustc --explain E0783`.
