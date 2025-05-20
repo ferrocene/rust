@@ -1,3 +1,4 @@
+//@ normalize-stderr: "\(Rust 20\d\d\)" -> "(Rust 2015)"
 //@ run-rustfix
 
 #![deny(missing_unsafe_on_extern)]

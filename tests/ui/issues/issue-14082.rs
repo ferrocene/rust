@@ -5,7 +5,7 @@
 use foo::Foo;
 
 mod foo {
-    pub use m::Foo; // this should shadow d::Foo
+    pub use crate::m::Foo; // this should shadow d::Foo
 }
 
 mod m {

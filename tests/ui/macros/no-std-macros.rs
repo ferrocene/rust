@@ -1,5 +1,6 @@
 //@ compile-flags: --crate-type=lib
 //@ check-pass
+//@ edition: 2015
 // issue #55482
 #![no_std]
 

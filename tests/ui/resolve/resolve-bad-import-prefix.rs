@@ -9,6 +9,6 @@ use m::{}; // OK
 use E::{}; // OK
 use S::{}; // FIXME, this and `use S::{self};` should be an error
 use Tr::{}; // FIXME, this and `use Tr::{self};` should be an error
-use Nonexistent::{}; //~ ERROR unresolved import `Nonexistent`
+use crate::Nonexistent::{}; //~ ERROR unresolved import `
 
 fn main () {}

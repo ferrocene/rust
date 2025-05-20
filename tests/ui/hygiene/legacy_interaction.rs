@@ -31,7 +31,7 @@ mod use_site {
         fn f() -> bool { true } // (3)
         fn g() -> bool { true } // (4)
 
-        ::def_site::m2!();
+        crate::def_site::m2!();
 
         let _: bool = f(); // This should resolve to (3)
         let _: bool = g(); // This should resolve to (4)

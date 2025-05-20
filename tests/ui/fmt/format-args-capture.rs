@@ -1,4 +1,7 @@
-//@ run-pass
+//@ revisions: edition2015 edition2018
+//@ [edition2015] edition: 2015
+//@ [edition2018] edition: 2018..
+//@ [edition2015] run-pass
 
 fn main() {
     named_argument_takes_precedence_to_captured();
@@ -43,7 +46,7 @@ fn panic_with_single_argument_does_not_get_formatted() {
 
     #[allow(non_fmt_panics)]
     let msg = std::panic::catch_unwind(|| {
-        panic!("{foo}");
+        panic!("{foo}"); //[edition2018]~ cannot find value `foo` in this scope
     })
     .unwrap_err();
 

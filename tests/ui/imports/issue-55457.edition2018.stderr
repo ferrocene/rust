@@ -1,0 +1,17 @@
+error[E0432]: unresolved import `NonExistent`
+  --> $DIR/issue-55457.rs:5:5
+   |
+LL | use NonExistent;
+   |     ^^^^^^^^^^^ no external crate `NonExistent`
+
+error[E0432]: unresolved import `non_existent`
+  --> $DIR/issue-55457.rs:6:5
+   |
+LL | use non_existent::non_existent;
+   |     ^^^^^^^^^^^^ use of unresolved module or unlinked crate `non_existent`
+   |
+   = help: you might be missing a crate named `non_existent`
+
+error: aborting due to 2 previous errors
+
+For more information about this error, try `rustc --explain E0432`.

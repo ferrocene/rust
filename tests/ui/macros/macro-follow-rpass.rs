@@ -7,10 +7,20 @@ macro_rules! follow_pat {
     ($p:pat =>) => {};
     ($p:pat ,) => {};
     ($p:pat =) => {};
-    ($p:pat |) => {};
     ($p:pat if) => {};
     ($p:pat in) => {};
 }
+
+// FOLLOW(pat_param) = {FatArrow, Comma, Eq, Or, Ident(if), Ident(in)}
+macro_rules! follow_pat_param {
+    ($p:pat_param =>) => {};
+    ($p:pat_param ,) => {};
+    ($p:pat_param =) => {};
+    ($p:pat_param |) => {};
+    ($p:pat_param if) => {};
+    ($p:pat_param in) => {};
+}
+
 // FOLLOW(expr) = {FatArrow, Comma, Semicolon}
 macro_rules! follow_expr {
     ($e:expr =>) => {};

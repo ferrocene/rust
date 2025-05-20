@@ -1,4 +1,5 @@
 //@ run-rustfix
+//@ edition: 2015..2018
 
 #![feature(box_patterns, stmt_expr_attributes, yeet_expr)]
 

@@ -11,7 +11,7 @@ pub fn main() {
         //~| found enum `Result<_, _>`
         //~| expected `Option<{integer}>`, found `Result<_, _>`
 
-        Err(e) => panic!(e)
+        Err(e) => panic!("{}", e)
         //~^ ERROR mismatched types
         //~| expected enum `Option<{integer}>`
         //~| found enum `Result<_, _>`

@@ -1,3 +1,6 @@
+//@ revisions: edition2015 edition2018
+//@[edition2015]edition:2015
+//@[edition2018]edition:2018..
 // Non-builtin attributes do not mess with field visibility resolution (issue #67006).
 
 mod internal {
@@ -14,12 +17,14 @@ mod internal {
 
 struct S {
     #[rustfmt::skip]
-    pub(in nonexistent) field: u8 //~ ERROR failed to resolve
+    pub(in nonexistent) field: u8 //[edition2015]~ ERROR failed to resolve
+    //[edition2018]~^ relative paths are not supported in visibilities in 2018 edition or later
 }
 
 struct Z(
     #[rustfmt::skip]
-    pub(in nonexistent) u8 //~ ERROR failed to resolve
+    pub(in nonexistent) u8 //[edition2015]~ ERROR failed to resolve
+    //[edition2018]~^ relative paths are not supported in visibilities in 2018 edition or later
 );
 
 fn main() {}

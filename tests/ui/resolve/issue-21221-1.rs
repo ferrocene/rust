@@ -1,3 +1,5 @@
+//@ normalize-stderr: "crate::" -> ""
+
 mod mul1 {
     pub trait Mul {}
 }

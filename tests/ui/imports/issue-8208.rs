@@ -2,8 +2,8 @@ use self::*; //~ ERROR: unresolved import `self::*` [E0432]
              //~^ NOTE cannot glob-import a module into itself
 
 mod foo {
-    use foo::*; //~ ERROR: unresolved import `foo::*` [E0432]
-                //~^ NOTE cannot glob-import a module into itself
+    use crate::foo::*; //~ ERROR: unresolved import `crate::foo::*` [E0432]
+                       //~^ NOTE cannot glob-import a module into itself
 
     mod bar {
         use super::bar::*;

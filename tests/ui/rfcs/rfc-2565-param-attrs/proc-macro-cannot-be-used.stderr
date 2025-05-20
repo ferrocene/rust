@@ -1,13 +1,13 @@
 error: expected non-macro attribute, found attribute macro `id`
   --> $DIR/proc-macro-cannot-be-used.rs:11:23
    |
-LL | extern "C" { fn ffi(#[id] arg1: i32, #[id] ...); }
+LL | extern "C" { fn ffi(#[id] arg1: i32, #[id] _: ...); }
    |                       ^^ not a non-macro attribute
 
 error: expected non-macro attribute, found attribute macro `id`
   --> $DIR/proc-macro-cannot-be-used.rs:11:40
    |
-LL | extern "C" { fn ffi(#[id] arg1: i32, #[id] ...); }
+LL | extern "C" { fn ffi(#[id] arg1: i32, #[id] _: ...); }
    |                                        ^^ not a non-macro attribute
 
 error: expected non-macro attribute, found attribute macro `id`
@@ -145,19 +145,19 @@ LL |     fn trait3<'a>(#[id] &'a mut self, #[id] arg1: u8);
 error: expected non-macro attribute, found attribute macro `id`
   --> $DIR/proc-macro-cannot-be-used.rs:57:21
    |
-LL |     fn trait4<'a>(#[id] self: Box<Self>, #[id] arg1: u8, #[id] Vec<u8>);
+LL |     fn trait4<'a>(#[id] self: Box<Self>, #[id] arg1: u8, #[id] _: Vec<u8>);
    |                     ^^ not a non-macro attribute
 
 error: expected non-macro attribute, found attribute macro `id`
   --> $DIR/proc-macro-cannot-be-used.rs:57:44
    |
-LL |     fn trait4<'a>(#[id] self: Box<Self>, #[id] arg1: u8, #[id] Vec<u8>);
+LL |     fn trait4<'a>(#[id] self: Box<Self>, #[id] arg1: u8, #[id] _: Vec<u8>);
    |                                            ^^ not a non-macro attribute
 
 error: expected non-macro attribute, found attribute macro `id`
   --> $DIR/proc-macro-cannot-be-used.rs:57:60
    |
-LL |     fn trait4<'a>(#[id] self: Box<Self>, #[id] arg1: u8, #[id] Vec<u8>);
+LL |     fn trait4<'a>(#[id] self: Box<Self>, #[id] arg1: u8, #[id] _: Vec<u8>);
    |                                                            ^^ not a non-macro attribute
 
 error: expected non-macro attribute, found attribute macro `id`

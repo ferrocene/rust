@@ -1,6 +1,7 @@
 //@ check-pass
 //@ run-rustfix
-//@ edition 2018
+//@ edition: 2015..2018
+//@ normalize-stderr: "\(Rust 20\d\d\)" -> "(Rust 2015)"
 #![warn(rust_2021_prelude_collisions)]
 
 trait MyTrait<A> {

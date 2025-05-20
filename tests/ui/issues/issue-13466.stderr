@@ -15,7 +15,7 @@ error[E0308]: mismatched types
 LL |     let _x: usize = match Some(1) {
    |                           ------- this expression has type `Option<{integer}>`
 ...
-LL |         Err(e) => panic!(e)
+LL |         Err(e) => panic!("{}", e)
    |         ^^^^^^ expected `Option<{integer}>`, found `Result<_, _>`
    |
    = note: expected enum `Option<{integer}>`

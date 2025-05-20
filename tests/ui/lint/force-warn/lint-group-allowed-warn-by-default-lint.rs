@@ -2,6 +2,7 @@
 // despite $LINT being allowed in module
 //@ compile-flags: --force-warn rust-2018-idioms
 //@ check-pass
+//@ edition: 2015..2018
 
 #![allow(bare_trait_objects)]
 

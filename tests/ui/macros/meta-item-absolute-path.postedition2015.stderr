@@ -1,0 +1,17 @@
+error[E0433]: failed to resolve: could not find `Absolute` in the list of imported crates
+  --> $DIR/meta-item-absolute-path.rs:5:12
+   |
+LL | #[derive(::Absolute)]
+   |            ^^^^^^^^ could not find `Absolute` in the list of imported crates
+
+error[E0433]: failed to resolve: could not find `Absolute` in the list of imported crates
+  --> $DIR/meta-item-absolute-path.rs:5:12
+   |
+LL | #[derive(::Absolute)]
+   |            ^^^^^^^^ could not find `Absolute` in the list of imported crates
+   |
+   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+
+error: aborting due to 2 previous errors
+
+For more information about this error, try `rustc --explain E0433`.

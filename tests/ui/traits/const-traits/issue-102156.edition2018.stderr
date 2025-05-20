@@ -1,0 +1,21 @@
+error: const `impl` for trait `From` which is not marked with `#[const_trait]`
+  --> $DIR/issue-102156.rs:14:37
+   |
+LL | impl<T: ?Sized, A: Allocator> const From<Box<T, A>> for Pin<Box<T, A>>
+   |                                     ^^^^^^^^^^^^^^^ this trait is not `const`
+   |
+   = note: marking a trait with `#[const_trait]` ensures all default method bodies are `const`
+   = note: adding a non-const method body in the future would be a breaking change
+
+error[E0210]: type parameter `T` must be used as the type parameter for some local type (e.g., `MyStruct<T>`)
+  --> $DIR/issue-102156.rs:14:6
+   |
+LL | impl<T: ?Sized, A: Allocator> const From<Box<T, A>> for Pin<Box<T, A>>
+   |      ^ type parameter `T` must be used as the type parameter for some local type
+   |
+   = note: implementing a foreign trait is only possible if at least one of the types for which it is implemented is local
+   = note: only traits defined in the current crate can be implemented for a type parameter
+
+error: aborting due to 2 previous errors
+
+For more information about this error, try `rustc --explain E0210`.

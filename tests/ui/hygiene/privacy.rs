@@ -6,7 +6,7 @@ mod foo {
     pub macro m($e:expr) {
         f();
         self::f();
-        ::foo::f();
+        crate::foo::f();
         $e
     }
 }

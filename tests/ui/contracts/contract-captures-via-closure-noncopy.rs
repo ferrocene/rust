@@ -1,4 +1,5 @@
 //@ compile-flags: -Zcontract-checks=yes
+//@ edition: 2021..
 
 #![feature(contracts)]
 //~^ WARN the feature `contracts` is incomplete and may not be safe to use and/or cause compiler crashes [incomplete_features]

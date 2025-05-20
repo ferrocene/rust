@@ -1,3 +1,5 @@
+//@ edition: 2015..2018
+
 fn main() {}
 
 #[cfg(false)] fn e() { let _ = [#[attr]]; }

@@ -2,7 +2,7 @@
 
 mod foo {
     pub macro m() { Vec::<i32>::new(); ().clone() }
-    fn f() { ::bar::m!(); }
+    fn f() { crate::bar::m!(); }
 }
 
 #[no_implicit_prelude]
@@ -12,7 +12,7 @@ mod bar {
         ().clone() //~ ERROR no method named `clone` found
     }
     fn f() {
-        ::foo::m!();
+        crate::foo::m!();
         assert!(true);
     }
 }

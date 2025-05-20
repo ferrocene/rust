@@ -10,6 +10,7 @@ pub fn bar() -> isize {
 }
 
 pub mod baz {
+    use crate::*;
     use {foo, bar};
     pub fn quux() -> isize {
         foo() + bar()
@@ -17,6 +18,7 @@ pub mod baz {
 }
 
 pub mod grault {
+    use crate::*;
     use {foo};
     pub fn garply() -> isize {
         foo()
