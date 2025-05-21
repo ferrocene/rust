@@ -1,3 +1,7 @@
+//@ revisions: edition2015 postedition2015
+//@[edition2015] edition: 2015
+//@[postedition2015] edition: 2018..
+
 struct S;
 
 pub mod m {
