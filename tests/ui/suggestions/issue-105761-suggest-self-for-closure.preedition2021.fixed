@@ -7,24 +7,24 @@
 struct S;
 impl S {
     fn foo(&mut self) {
-        let x = |v: i32| {
-            self.bar();
-            self.hel();
+        let x = |this: &Self, v: i32| {
+            this.bar();
+            this.hel();
         };
         self.qux(); //~ ERROR cannot borrow `*self` as mutable because it is also borrowed as immutable
-        x(1);
-        x(3);
+        x(self, 1);
+        x(self, 3);
     }
     fn bar(&self) {}
     fn hel(&self) {}
     fn qux(&mut self) {}
 
     fn hello(&mut self) {
-        let y = || {
-            self.bar();
+        let y = |this: &Self| {
+            this.bar();
         };
         self.qux(); //~ ERROR cannot borrow `*self` as mutable because it is also borrowed as immutable
-        y();
+        y(self);
     }
 }
 
