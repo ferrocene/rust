@@ -1,3 +1,7 @@
+//@ revisions: preedition2021 postedition2021
+//@[preedition2021] edition: ..2018
+//@[postedition2021] edition: 2021..
+
 // check that dropck does the right thing with misc. Ty variants
 
 use std::fmt;
@@ -29,7 +33,7 @@ fn closure() {
     v = vec![""];
     _w = {
         let u = NoisyDrop(&v);
-        //~^ ERROR `v` does not live long enough
+        //[preedition2021]~^ ERROR `v` does not live long enough
         move || u.0.len()
     };
 }
