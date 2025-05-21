@@ -1,3 +1,7 @@
+//@ revisions: preedition2021 postedition2021
+//@[preedition2021] edition: ..2018
+//@[postedition2021] edition: 2021..
+
 #[derive(Clone)]
 enum Either {
     One(X),
