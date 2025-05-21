@@ -1,0 +1,29 @@
+error[E0596]: cannot borrow `*x` as mutable, as it is behind a `&` reference
+  --> $DIR/borrowck-closures-mut-of-imm.rs:13:18
+   |
+LL |     let mut c1 = || set(&mut *x);
+   |                  ^^          -- mutable borrow occurs due to use of `*x` in closure
+   |                  |
+   |                  `x` is a `&` reference, so the data it refers to cannot be borrowed as mutable
+   |
+help: consider changing this to be a mutable reference
+   |
+LL | fn a(x: &mut isize) {
+   |          +++
+
+error[E0596]: cannot borrow `*x` as mutable, as it is behind a `&` reference
+  --> $DIR/borrowck-closures-mut-of-imm.rs:15:18
+   |
+LL |     let mut c2 = || set(&mut *x);
+   |                  ^^          -- mutable borrow occurs due to use of `*x` in closure
+   |                  |
+   |                  `x` is a `&` reference, so the data it refers to cannot be borrowed as mutable
+   |
+help: consider changing this to be a mutable reference
+   |
+LL | fn a(x: &mut isize) {
+   |          +++
+
+error: aborting due to 2 previous errors
+
+For more information about this error, try `rustc --explain E0596`.
