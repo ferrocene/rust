@@ -1,3 +1,4 @@
+//@ edition: ..2018
 pub trait Trait<'a, T> {}
 
 pub struct Struct<T>;
