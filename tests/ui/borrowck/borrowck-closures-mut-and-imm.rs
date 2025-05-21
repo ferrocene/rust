@@ -1,3 +1,7 @@
+//@ revisions: preedition2021 postedition2021
+//@[preedition2021] edition: ..2018
+//@[postedition2021] edition: 2021..
+
 // Tests that two closures cannot simultaneously have mutable
 // and immutable access to the variable. Issue #6801.
 
@@ -79,7 +83,8 @@ fn h() {
     let mut x: Box<_> = Box::new(Foo { f: Box::new(3) });
     let c1 = || get(&*x.f);
     let c2 = || *x.f = 5;
-    //~^ ERROR cannot borrow `x` as mutable because it is also borrowed as immutable
+    //[preedition2021]~^ ERROR cannot borrow `x` as mutable because it is also borrowed as immutable
+    //[postedition2021]~^^ ERROR cannot borrow `*x.f` as mutable because it is also borrowed as immutable
     drop(c1);
 }
 
