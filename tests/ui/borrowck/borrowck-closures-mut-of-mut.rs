@@ -1,3 +1,4 @@
+//@ normalize-stderr: "`\*x`" -> "`x`"
 // Tests that two closures cannot simultaneously both have mutable
 // access to the variable. Related to issue #6801.
 
@@ -12,7 +13,7 @@ fn set(x: &mut isize) {
 fn a(x: &mut isize) {
     let mut c1 = || set(&mut *x);
     let mut c2 = || set(&mut *x);
-    //~^ ERROR two closures require unique access to `x` at the same time
+    //~^ ERROR two closures require unique access to
     c2(); c1();
 }
 
