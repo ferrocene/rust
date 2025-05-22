@@ -1,4 +1,3 @@
-//@ edition: ..2021
 //@ run-rustfix
 //@ needs-unwind
 //@ edition: .. 2018
