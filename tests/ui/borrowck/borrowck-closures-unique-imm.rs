@@ -1,3 +1,4 @@
+//@ normalize-stderr: "`this`" -> "`this.x`"
 struct Foo {
     x: isize,
 }
