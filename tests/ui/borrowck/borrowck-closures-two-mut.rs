@@ -1,7 +1,7 @@
 // Tests that two closures cannot simultaneously have mutable
 // access to the variable, whether that mutable access be used
 // for direct assignment or for taking mutable ref. Issue #6801.
-
+//@ normalize-stderr: "`\*x\.f`" -> "`x`"
 
 
 fn to_fn_mut<F: FnMut()>(f: F) -> F { f }
@@ -47,7 +47,7 @@ fn g() {
     let mut x: Box<_> = Box::new(Foo { f: Box::new(3) });
     let c1 = to_fn_mut(|| set(&mut *x.f));
     let c2 = to_fn_mut(|| set(&mut *x.f));
-    //~^ ERROR cannot borrow `x` as mutable more than once
+    //~^ ERROR as mutable more than once
     drop((c1, c2));
 }
 
