@@ -1,5 +1,6 @@
 // Tests that methods that implement a trait cannot be invoked
 // unless the trait is imported.
+//@ normalize-stderr: "use Lib" -> "use crate::Lib"
 
 mod Lib {
     pub trait TheTrait {
