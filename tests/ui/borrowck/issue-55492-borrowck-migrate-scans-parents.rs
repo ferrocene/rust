@@ -1,6 +1,8 @@
 // rust-lang/rust#55492: errors detected during MIR-borrowck's
 // analysis of a closure body may only be caught when AST-borrowck
 // looks at some parent.
+//@ normalize-stderr: "`x\.0`, as `x`" -> "`x`, as it"
+//@ normalize-stderr: "`x\.0` as mutable, as `x`" -> "`x` as mutable, as it"
 
 // transcribed from borrowck-closures-unique.rs
 mod borrowck_closures_unique {
