@@ -1,0 +1,20 @@
+error: lifetime may not live long enough
+  --> $DIR/suggest-lt-on-ty-alias-w-generics.rs:8:5
+   |
+LL |   fn test(x: &i32) -> Lazy<i32> {
+   |              - let's call the lifetime of this reference `'1`
+LL | /     Box::new(|| {
+LL | |
+LL | |
+LL | |         *x
+LL | |     })
+   | |______^ returning this value requires that `'1` must outlive `'static`
+   |
+help: to declare that the trait object captures data from argument `x`, you can add a lifetime parameter `'a` in the type alias
+   |
+LL - type Lazy<T> = Box<dyn Fn() -> T + 'static>;
+LL + type Lazy<'a, T> = Box<dyn Fn() -> T + 'a>;
+   |
+
+error: aborting due to 1 previous error
+
