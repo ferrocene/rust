@@ -1,3 +1,4 @@
+//@ normalize-stderr: "`f\.n`" -> "`f`"
 use std::collections::HashSet;
 
 struct Foo {
@@ -15,7 +16,7 @@ impl Foo {
 fn bar(f: &mut Foo) {
     f.foo(
     //~^ ERROR cannot borrow `*f` as mutable
-        |a| { //~ ERROR closure requires unique access to `f`
+        |a| { //~ ERROR closure requires unique access to 
             f.n.insert(*a);
         })
 }
