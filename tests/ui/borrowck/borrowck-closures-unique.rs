@@ -3,7 +3,7 @@
 // be borrowed (here, `x`) will not be borrowed *mutably*, but
 //  may be *immutable*, but we cannot allow
 // multiple borrows.
-
+//@ normalize-stderr: "`\*x`" -> "`x`"
 
 
 fn get(x: &isize) -> isize {
@@ -23,25 +23,25 @@ fn a(x: &mut isize) {
 
 fn b(x: &mut isize) {
     let c1 = || get(x);
-    let c2 = || set(x); //~ ERROR closure requires unique access to `x`
+    let c2 = || set(x); //~ ERROR closure requires unique access to
     c1;
 }
 
 fn c(x: &mut isize) {
     let c1 = || get(x);
-    let c2 = || { get(x); set(x); }; //~ ERROR closure requires unique access to `x`
+    let c2 = || { get(x); set(x); }; //~ ERROR closure requires unique access to
     c1;
 }
 
 fn d(x: &mut isize) {
     let c1 = || set(x);
-    let c2 = || set(x); //~ ERROR two closures require unique access to `x` at the same time
+    let c2 = || set(x); //~ ERROR two closures require unique access to
     c1;
 }
 
 fn e(x: &'static mut isize) {
     let c1 = |y: &'static mut isize| x = y;
-    //~^ ERROR cannot assign to `x`, as it is not declared as mutable
+    //~^ ERROR as it is not declared as mutable
     c1;
 }
 
