@@ -1,5 +1,5 @@
 error[E0432]: unresolved import `main`
-  --> $DIR/inaccessible-test-modules.rs:9:5
+  --> $DIR/inaccessible-test-modules.rs:8:5
    |
 LL | use main as x;
    |     ^^^^^^^^^ no external crate `main`
