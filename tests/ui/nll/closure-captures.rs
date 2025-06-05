@@ -1,4 +1,6 @@
 // Some cases with closures that might be problems
+//@ normalize-stderr: "use of `\*x` in" -> "use of `x` in"
+//@ normalize-stderr: "`\*x` as mutable, as `Fn` closures cannot mutate their captured variables" -> "`x` as mutable, as it is a captured variable in a `Fn` closure"
 
 // Should have one error per assignment
 
