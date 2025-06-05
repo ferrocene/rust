@@ -1,4 +1,7 @@
 //@ compile-flags:-Cstrip=none
+//@revisions: preedition2021 postedition2021
+//@[preedition2021] edition: ..2018
+//@[postedition2021] edition: 2021..
 //@ run-fail
 //@ check-run-results
 //@ exec-env:RUST_BACKTRACE=1
