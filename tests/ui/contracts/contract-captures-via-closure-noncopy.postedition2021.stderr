@@ -1,0 +1,32 @@
+warning: the feature `contracts` is incomplete and may not be safe to use and/or cause compiler crashes
+  --> $DIR/contract-captures-via-closure-noncopy.rs:6:12
+   |
+LL | #![feature(contracts)]
+   |            ^^^^^^^^^
+   |
+   = note: see issue #128044 <https://github.com/rust-lang/rust/issues/128044> for more information
+   = note: `#[warn(incomplete_features)]` on by default
+
+error[E0382]: use of moved value: `x`
+  --> $DIR/contract-captures-via-closure-noncopy.rs:20:16
+   |
+LL | #[core::contracts::ensures({let old = x; move |ret:&Baz| ret.baz == old.baz*2 })]
+   |                                       - value moved here
+...
+LL | fn doubler(x: Baz) -> Baz {
+   |            - move occurs because `x` has type `Baz`, which does not implement the `Copy` trait
+LL |     Baz { baz: x.baz + 10 }
+   |                ^^^^^ value used here after move
+   |
+note: if `Baz` implemented `Clone`, you could clone the value
+  --> $DIR/contract-captures-via-closure-noncopy.rs:9:1
+   |
+LL | struct Baz {
+   | ^^^^^^^^^^ consider implementing `Clone` for this type
+...
+LL | #[core::contracts::ensures({let old = x; move |ret:&Baz| ret.baz == old.baz*2 })]
+   |                                       - you could clone this value
+
+error: aborting due to 1 previous error; 1 warning emitted
+
+For more information about this error, try `rustc --explain E0382`.
