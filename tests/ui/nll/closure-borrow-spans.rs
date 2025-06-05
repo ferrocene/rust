@@ -1,3 +1,7 @@
+//@ revisions: preedition2021 postedition2021
+//@[preedition2021] edition: ..2018
+//@[postedition2021] edition: 2021..
+
 // check that existing borrows due to a closure capture give a special note
 
 fn move_while_borrowed(x: String) {
@@ -83,7 +87,7 @@ fn drop_while_borrowed_unique() {
     let f;
     {
         let x = &mut z;
-        f = || *x = 0; //~ ERROR
+        f = || *x = 0; //[preedition2021]~ ERROR
     }
     f.use_ref();
 }
