@@ -1,6 +1,6 @@
 //@ revisions: edition2015 postedition2015
 //@[edition2015] edition: 2015
-//@[postedition2015] edition: 2015..
+//@[postedition2015] edition: 2018..
 
 use std::result;
 impl result { //~ ERROR expected type, found module `result`

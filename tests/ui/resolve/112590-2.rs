@@ -1,4 +1,5 @@
 //@ run-rustfix
+//@ edition: 2018..
 mod foo {
     pub mod bar {
         pub mod baz {

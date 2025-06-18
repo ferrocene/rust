@@ -1,4 +1,7 @@
 //@ aux-build:pub_restricted.rs
+//@ revisions: edition2015 edition2018
+//@[edition2015] edition: 2015
+//@[edition2018] edition: 2018..
 
 #![allow(warnings)]
 extern crate pub_restricted;
@@ -16,9 +19,9 @@ mod foo {
         }
     }
     fn f() {
-        use foo::bar::S;
-        pub(self) use foo::bar::f; // ok
-        pub(super) use foo::bar::f as g; //~ ERROR cannot be re-exported
+        use crate::foo::bar::S;
+        pub(self) use crate::foo::bar::f; // ok
+        pub(super) use crate::foo::bar::f as g; //~ ERROR cannot be re-exported
         S::default().x; // ok
         S::default().f(); // ok
         S::g(); // ok
@@ -47,6 +50,10 @@ fn main() {
 }
 
 mod pathological {
-    pub(in bad::path) mod m1 {} //~ ERROR failed to resolve: use of unresolved module or unlinked crate `bad`
-    pub(in foo) mod m2 {} //~ ERROR visibilities can only be restricted to ancestor modules
+    pub(in bad::path) mod m1 {}
+    //[edition2015]~^ ERROR failed to resolve: use of unresolved module or unlinked crate `bad`
+    //[edition2018]~^^ ERROR relative paths are not supported in visibilities in 2018 edition or later
+    pub(in foo) mod m2 {}
+    //[edition2015]~^ ERROR visibilities can only be restricted to ancestor modules
+    //[edition2018]~^^ ERROR relative paths are not supported in visibilities in 2018 edition or later
 }

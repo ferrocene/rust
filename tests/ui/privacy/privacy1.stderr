@@ -104,12 +104,12 @@ LL |     mod baz {
    |     ^^^^^^^
 
 error[E0603]: trait `B` is private
-  --> $DIR/privacy1.rs:113:16
+  --> $DIR/privacy1.rs:113:21
    |
-LL |         ::bar::B::foo();
-   |                ^  --- associated function `foo` is not publicly re-exported
-   |                |
-   |                private trait
+LL |         crate::bar::B::foo();
+   |                     ^  --- associated function `foo` is not publicly re-exported
+   |                     |
+   |                     private trait
    |
 note: the trait `B` is defined here
   --> $DIR/privacy1.rs:40:5
@@ -118,10 +118,10 @@ LL |     trait B {
    |     ^^^^^^^
 
 error[E0603]: function `epriv` is private
-  --> $DIR/privacy1.rs:119:20
+  --> $DIR/privacy1.rs:119:25
    |
-LL |             ::bar::epriv();
-   |                    ^^^^^ private function
+LL |             crate::bar::epriv();
+   |                         ^^^^^ private function
    |
 note: the function `epriv` is defined here
   --> $DIR/privacy1.rs:65:9
@@ -130,10 +130,10 @@ LL |         fn epriv();
    |         ^^^^^^^^^^^
 
 error[E0603]: module `baz` is private
-  --> $DIR/privacy1.rs:128:16
+  --> $DIR/privacy1.rs:128:21
    |
-LL |         ::bar::baz::foo();
-   |                ^^^ private module
+LL |         crate::bar::baz::foo();
+   |                     ^^^ private module
    |
 note: the module `baz` is defined here
   --> $DIR/privacy1.rs:50:5
@@ -142,15 +142,15 @@ LL |     mod baz {
    |     ^^^^^^^
 help: consider importing this function through its public re-export instead
    |
-LL -         ::bar::baz::foo();
+LL -         crate::bar::baz::foo();
 LL +         bar::foo();
    |
 
 error[E0603]: module `baz` is private
-  --> $DIR/privacy1.rs:129:16
+  --> $DIR/privacy1.rs:129:21
    |
-LL |         ::bar::baz::bar();
-   |                ^^^ private module
+LL |         crate::bar::baz::bar();
+   |                     ^^^ private module
    |
 note: the module `baz` is defined here
   --> $DIR/privacy1.rs:50:5
@@ -159,15 +159,15 @@ LL |     mod baz {
    |     ^^^^^^^
 help: consider importing this function through its public re-export instead
    |
-LL -         ::bar::baz::bar();
+LL -         crate::bar::baz::bar();
 LL +         bar::bar();
    |
 
 error[E0603]: trait `B` is private
-  --> $DIR/privacy1.rs:158:17
+  --> $DIR/privacy1.rs:158:22
    |
-LL |     impl ::bar::B for f32 { fn foo() -> f32 { 1.0 } }
-   |                 ^ private trait
+LL |     impl crate::bar::B for f32 { fn foo() -> f32 { 1.0 } }
+   |                      ^ private trait
    |
 note: the trait `B` is defined here
   --> $DIR/privacy1.rs:40:5

@@ -1,9 +1,13 @@
+//@ revisions: edition2015 edition2018
+//@[edition2015] edition: 2015
+//@[edition2018] edition: 2018..
 mod a {
     pub trait Trait {}
 }
 
 mod b {
-    use Trait; //~ ERROR unresolved import `Trait`
+    use Trait;
+    //~^ ERROR unresolved import `Trait`
 }
 
 mod c {

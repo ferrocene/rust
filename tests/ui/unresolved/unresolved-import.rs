@@ -1,8 +1,13 @@
+//@ revisions: edition2015 edition2018
+//@[edition2015] edition: 2015
+//@[edition2018] edition: 2018..
 use foo::bar;
 //~^ ERROR unresolved import `foo` [E0432]
 //~| NOTE use of unresolved module or unlinked crate `foo`
-//~| HELP you might be missing a crate named `foo`
-//~| SUGGESTION extern crate foo;
+//[edition2015]~| HELP you might be missing a crate named `foo`
+//[edition2015]~| SUGGESTION extern crate foo;
+//[edition2018]~| HELP there is a crate or module with a similar name
+//[edition2018]~| SUGGESTION food
 
 use bar::Baz as x;
 //~^ ERROR unresolved import `bar::Baz` [E0432]
@@ -31,7 +36,8 @@ mod food {
 
     mod zug {
         pub mod baz {
-        //~^ NOTE module `food::zug::baz` exists but is inaccessible
+        //[edition2015]~^ NOTE module `food::zug::baz` exists but is inaccessible
+        //[edition2018]~^^ NOTE module `crate::food::zug::baz` exists but is inaccessible
         //~| NOTE not accessible
             pub struct Foobar;
         }
@@ -44,9 +50,9 @@ mod m {
     }
 
     use MyEnum::*;
-    //~^ ERROR unresolved import `MyEnum` [E0432]
-    //~| HELP a similar path exists
-    //~| SUGGESTION self::MyEnum
+    //[edition2015]~^ ERROR unresolved import `MyEnum` [E0432]
+    //[edition2015]~| HELP a similar path exists
+    //[edition2015]~| SUGGESTION self::MyEnum
 }
 
 mod items {
@@ -55,9 +61,9 @@ mod items {
     }
 
     use Enum::*;
-    //~^ ERROR unresolved import `Enum` [E0432]
-    //~| HELP a similar path exists
-    //~| SUGGESTION self::Enum
+    //[edition2015]~^ ERROR unresolved import `Enum` [E0432]
+    //[edition2015]~| HELP a similar path exists
+    //[edition2015]~| SUGGESTION self::Enum
 
     fn item() {}
 }

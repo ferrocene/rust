@@ -110,23 +110,23 @@ mod foo {
                                      //~^ ERROR: method `bar2` is private
 
         let _: isize =
-        ::bar::B::foo();        //~ ERROR: trait `B` is private
-        ::lol();
+        crate::bar::B::foo();        //~ ERROR: trait `B` is private
+        crate::lol();
 
-        ::bar::Enum::Pub;
+        crate::bar::Enum::Pub;
 
         unsafe {
-            ::bar::epriv(); //~ ERROR: function `epriv` is private
-            ::bar::epub();
+            crate::bar::epriv(); //~ ERROR: function `epriv` is private
+            crate::bar::epub();
         }
 
-        ::bar::foo();
-        ::bar::bar();
+        crate::bar::foo();
+        crate::bar::bar();
 
-        ::bar::gpub();
+        crate::bar::gpub();
 
-        ::bar::baz::foo(); //~ ERROR: module `baz` is private
-        ::bar::baz::bar(); //~ ERROR: module `baz` is private
+        crate::bar::baz::foo(); //~ ERROR: module `baz` is private
+        crate::bar::baz::bar(); //~ ERROR: module `baz` is private
     }
 
     fn test2() {
@@ -155,7 +155,7 @@ mod foo {
         bar::bar();
     }
 
-    impl ::bar::B for f32 { fn foo() -> f32 { 1.0 } }
+    impl crate::bar::B for f32 { fn foo() -> f32 { 1.0 } }
     //~^ ERROR: trait `B` is private
 }
 

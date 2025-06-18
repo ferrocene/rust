@@ -1,7 +1,7 @@
 //@ aux-build:macro-in-other-crate.rs
 //@ revisions: edition2015 postedition2015
 //@[edition2015] edition:2015
-//@[postedition2015] edition:2015..
+//@[postedition2015] edition:2018..
 
 #![feature(decl_macro)]
 

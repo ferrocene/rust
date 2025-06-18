@@ -1,5 +1,5 @@
 error[E0658]: gen blocks are experimental
-  --> $DIR/feature-gate-gen_blocks.rs:7:5
+  --> $DIR/feature-gate-gen_blocks.rs:8:5
    |
 LL |     gen {};
    |     ^^^
@@ -9,20 +9,10 @@ LL |     gen {};
    = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
 
 error[E0658]: gen blocks are experimental
-  --> $DIR/feature-gate-gen_blocks.rs:15:5
+  --> $DIR/feature-gate-gen_blocks.rs:17:5
    |
 LL |     async gen {};
    |     ^^^^^^^^^
-   |
-   = note: see issue #117078 <https://github.com/rust-lang/rust/issues/117078> for more information
-   = help: add `#![feature(gen_blocks)]` to the crate attributes to enable
-   = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
-
-error[E0658]: gen blocks are experimental
-  --> $DIR/feature-gate-gen_blocks.rs:26:5
-   |
-LL |     gen {};
-   |     ^^^
    |
    = note: see issue #117078 <https://github.com/rust-lang/rust/issues/117078> for more information
    = help: add `#![feature(gen_blocks)]` to the crate attributes to enable
@@ -31,6 +21,16 @@ LL |     gen {};
 error[E0658]: gen blocks are experimental
   --> $DIR/feature-gate-gen_blocks.rs:29:5
    |
+LL |     gen {};
+   |     ^^^
+   |
+   = note: see issue #117078 <https://github.com/rust-lang/rust/issues/117078> for more information
+   = help: add `#![feature(gen_blocks)]` to the crate attributes to enable
+   = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
+
+error[E0658]: gen blocks are experimental
+  --> $DIR/feature-gate-gen_blocks.rs:32:5
+   |
 LL |     async gen {};
    |     ^^^^^^^^^
    |
@@ -39,13 +39,13 @@ LL |     async gen {};
    = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
 
 error[E0282]: type annotations needed
-  --> $DIR/feature-gate-gen_blocks.rs:7:5
+  --> $DIR/feature-gate-gen_blocks.rs:8:5
    |
 LL |     gen {};
    |     ^^^^^^ cannot infer type
 
 error[E0282]: type annotations needed
-  --> $DIR/feature-gate-gen_blocks.rs:15:5
+  --> $DIR/feature-gate-gen_blocks.rs:17:5
    |
 LL |     async gen {};
    |     ^^^^^^^^^^^^ cannot infer type

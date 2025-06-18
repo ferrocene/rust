@@ -1,5 +1,5 @@
 error[E0432]: unresolved import `foo`
-  --> $DIR/unresolved-import.rs:1:5
+  --> $DIR/unresolved-import.rs:4:5
    |
 LL | use foo::bar;
    |     ^^^ use of unresolved module or unlinked crate `foo`
@@ -10,7 +10,7 @@ LL + extern crate foo;
    |
 
 error[E0432]: unresolved import `bar::Baz`
-  --> $DIR/unresolved-import.rs:7:5
+  --> $DIR/unresolved-import.rs:12:5
    |
 LL | use bar::Baz as x;
    |     ^^^^^---^^^^^
@@ -19,7 +19,7 @@ LL | use bar::Baz as x;
    |     no `Baz` in `bar`
 
 error[E0432]: unresolved import `food::baz`
-  --> $DIR/unresolved-import.rs:13:5
+  --> $DIR/unresolved-import.rs:18:5
    |
 LL | use food::baz;
    |     ^^^^^^---
@@ -28,13 +28,13 @@ LL | use food::baz;
    |     no `baz` in `food`
    |
 note: module `food::zug::baz` exists but is inaccessible
-  --> $DIR/unresolved-import.rs:33:9
+  --> $DIR/unresolved-import.rs:38:9
    |
 LL |         pub mod baz {
    |         ^^^^^^^^^^^ not accessible
 
 error[E0432]: unresolved import `food::beens`
-  --> $DIR/unresolved-import.rs:19:12
+  --> $DIR/unresolved-import.rs:24:12
    |
 LL | use food::{beens as Foo};
    |            -----^^^^^^^
@@ -43,13 +43,13 @@ LL | use food::{beens as Foo};
    |            help: a similar name exists in the module: `beans`
 
 error[E0432]: unresolved import `MyEnum`
-  --> $DIR/unresolved-import.rs:46:9
+  --> $DIR/unresolved-import.rs:52:9
    |
 LL |     use MyEnum::*;
    |         ^^^^^^ help: a similar path exists: `self::MyEnum`
 
 error[E0432]: unresolved import `Enum`
-  --> $DIR/unresolved-import.rs:57:9
+  --> $DIR/unresolved-import.rs:63:9
    |
 LL |     use Enum::*;
    |         ^^^^ help: a similar path exists: `self::Enum`

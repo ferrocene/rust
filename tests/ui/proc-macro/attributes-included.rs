@@ -3,6 +3,7 @@
 
 #![warn(unused)]
 
+#[allow(unused)]
 extern crate attributes_included;
 
 use attributes_included::*;

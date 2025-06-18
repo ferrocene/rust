@@ -1,4 +1,5 @@
 //@ run-rustfix
+//@ edition: 2018..
 use std::vec;
 
 use std::sync::atomic::AtomicBool;
@@ -12,7 +13,7 @@ mod foo {
 }
 
 mod u {
-    use foo::bar::baz::MyVec;
+    use crate::foo::bar::baz::MyVec;
 
 fn _a() {
         let _: Vec<i32> = MyVec::new(); //~ ERROR failed to resolve
@@ -20,7 +21,7 @@ fn _a() {
 }
 
 mod v {
-    use foo::bar::baz::MyVec;
+    use crate::foo::bar::baz::MyVec;
 
 fn _b() {
         let _: Vec<i32> = MyVec::new(); //~ ERROR failed to resolve

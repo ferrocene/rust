@@ -1,4 +1,7 @@
 //@ ignore-sgx std::os::fortanix_sgx::usercalls::raw::Result changes compiler suggestions
+//@ revisions: edition2015 edition2018
+//@ [edition2015] edition: 2015
+//@ [edition2018] edition: 2018..
 
 pub struct GslResult {
     pub val: f64,

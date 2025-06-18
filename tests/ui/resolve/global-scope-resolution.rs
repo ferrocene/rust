@@ -1,5 +1,6 @@
 //! Test global scope resolution with :: operator
 
+//@ edition: 2015
 //@ run-pass
 
 pub fn f() -> isize {
