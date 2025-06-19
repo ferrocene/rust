@@ -1,3 +1,3 @@
 fn main() {
-    panic!(@); //~ ERROR no rules expected `@`
+    env!(@); //~ ERROR expected expression, found `@`
 }

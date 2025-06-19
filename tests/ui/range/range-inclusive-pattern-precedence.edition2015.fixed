@@ -12,11 +12,11 @@
 pub fn main() {
     match &12 {
         #[cfg(edition2015)]
-        &0...9 => {}
+        &(0..=9) => {}
         //[edition2015]~^ WARN `...` range patterns are deprecated
         //[edition2015]~| WARN this is accepted in the current edition
         //[edition2015]~| HELP use `..=` for an inclusive range
-        &10..=15 => {}
+        &(10..=15) => {}
         //~^ ERROR the range pattern here has ambiguous interpretation
         //~| HELP add parentheses to clarify the precedence
         &(16..=20) => {}

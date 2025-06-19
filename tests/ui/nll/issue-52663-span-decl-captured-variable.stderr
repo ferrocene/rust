@@ -1,17 +1,18 @@
 error[E0507]: cannot move out of `x.0`, as `x` is a captured variable in an `Fn` closure
-  --> $DIR/issue-52663-span-decl-captured-variable.rs:8:26
+  --> $DIR/issue-52663-span-decl-captured-variable.rs:10:17
    |
 LL |        let x = (vec![22], vec![44]);
    |            - captured outer variable
-LL |        expect_fn(|| drop(x.0));
-   |                  --      ^^^ move occurs because `x.0` has type `Vec<i32>`, which does not implement the `Copy` trait
-   |                  |
-   |                  captured by this `Fn` closure
+LL |        expect_fn(|| {
+   |                  -- captured by this `Fn` closure
+LL |            let _x = &x;
+LL |            drop(x.0)
+   |                 ^^^ move occurs because `x.0` has type `Vec<i32>`, which does not implement the `Copy` trait
    |
 help: consider cloning the value if the performance cost is acceptable
    |
-LL |        expect_fn(|| drop(x.0.clone()));
-   |                             ++++++++
+LL |            drop(x.0.clone())
+   |                    ++++++++
 
 error: aborting due to 1 previous error
 

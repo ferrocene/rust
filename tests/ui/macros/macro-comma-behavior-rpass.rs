@@ -13,6 +13,7 @@
 
 //@ compile-flags: --test -C debug_assertions=yes
 //@ revisions: std core
+//@ edition: ..2021
 
 #![cfg_attr(core, no_std)]
 

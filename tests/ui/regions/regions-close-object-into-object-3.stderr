@@ -1,8 +1,8 @@
 error[E0515]: cannot return value referencing local data `*v`
   --> $DIR/regions-close-object-into-object-3.rs:11:5
    |
-LL |     Box::new(B(&*v)) as Box<X>
-   |     ^^^^^^^^^^^---^^^^^^^^^^^^
+LL |     Box::new(B(&*v)) as Box<dyn X>
+   |     ^^^^^^^^^^^---^^^^^^^^^^^^^^^^
    |     |          |
    |     |          `*v` is borrowed here
    |     returns a value referencing data owned by the current function

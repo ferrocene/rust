@@ -1,4 +1,7 @@
-//@ edition: 2018..
+//@ revisions: edition2015 edition2018 edition2021
+//@ [edition2015] edition:2015
+//@ [edition2018] edition:2018
+//@ [edition2021] edition:2021
 
 pub trait Foo<A=Self> {
     fn foo(&self);

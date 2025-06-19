@@ -8,6 +8,9 @@
 // This case is interesting because a borrow of **x is untracked, because **x is
 // immutable. However, for matches we care that **x refers to the same value
 // until we have chosen a match arm.
+//@ revisions: edition2015 edition2021
+//@ [edition2015] edition: 2015..2021
+//@ [edition2021] edition: 2021..
 
 struct ForceFnOnce;
 fn main() {
@@ -18,7 +21,8 @@ fn main() {
         Some(&_) if {
             // ForceFnOnce needed to exploit #27282
             (|| { *x = &None; drop(force_fn_once); })();
-            //~^ ERROR cannot mutably borrow `x` in match guard [E0510]
+            //[edition2015]~^ ERROR cannot mutably borrow `x` in match guard [E0510]
+            //[edition2021]~^^ ERROR cannot mutably borrow `*x` in match guard [E0510]
             false
         } => {}
         Some(&a) if { // this binds to garbage if we've corrupted discriminant

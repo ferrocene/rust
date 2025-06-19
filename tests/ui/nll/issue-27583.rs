@@ -22,11 +22,11 @@ pub struct MemCategorizationContext<'t, 'a: 't, 'tcx : 'a> {
 pub struct ExprUseVisitor<'d, 't, 'a: 't, 'tcx:'a+'d> {
     typer: &'t InferCtxt<'a, 'tcx>,
     mc: MemCategorizationContext<'t, 'a, 'tcx>,
-    delegate: &'d mut (Delegate<'tcx>+'d),
+    delegate: &'d mut (dyn Delegate<'tcx> +'d),
 }
 
 impl<'d,'t,'a,'tcx> ExprUseVisitor<'d,'t,'a,'tcx> {
-    pub fn new(delegate: &'d mut Delegate<'tcx>,
+    pub fn new(delegate: &'d mut dyn Delegate<'tcx>,
                typer: &'t InferCtxt<'a, 'tcx>)
                -> ExprUseVisitor<'d,'t,'a,'tcx>
     {

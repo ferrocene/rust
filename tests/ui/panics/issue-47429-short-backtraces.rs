@@ -1,5 +1,8 @@
 // Regression test for #47429: short backtraces were not terminating correctly
 
+//@ revisions: ed2015 ed2021
+//@ [ed2015] edition: 2015..2021
+//@ [ed2021] edition: 2021..
 //@ compile-flags: -O
 //@ compile-flags:-Cstrip=none
 //@ run-fail

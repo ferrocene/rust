@@ -4,6 +4,9 @@
 // means that our conservative check for mutation in guards will
 // reject it. But I want to make sure that we continue to reject it
 // (under NLL) even when that conservative check goes away.
+//@ revisions: edition2015 edition2021
+//@ [edition2015] edition: 2015..2021
+//@ [edition2021] edition: 2021..
 
 #![feature(if_let_guard)]
 
@@ -12,7 +15,8 @@ fn main() {
     match b {
         &mut false => {},
         ref mut r if { (|| { let bar = &mut *r; **bar = false; })();
-        //~^ ERROR cannot borrow `r` as mutable, as it is immutable for the pattern guard
+        //[edition2015]~^ ERROR cannot borrow `r` as mutable, as it is immutable for the pattern guard
+        //[edition2021]~^^ ERROR cannot borrow `*r` as mutable, as it is immutable for the pattern guard
                              false } => { &mut *r; },
         &mut true => { println!("You might think we should get here"); },
         _ => panic!("surely we could never get here, since rustc warns it is unreachable."),
@@ -22,7 +26,8 @@ fn main() {
     match b {
         &mut false => {},
         ref mut r if let Some(()) = { (|| { let bar = &mut *r; **bar = false; })();
-        //~^ ERROR cannot borrow `r` as mutable, as it is immutable for the pattern guard
+        //[edition2015]~^ ERROR cannot borrow `r` as mutable, as it is immutable for the pattern guard
+        //[edition2021]~^^ ERROR cannot borrow `*r` as mutable, as it is immutable for the pattern guard
                              None } => { &mut *r; },
         &mut true => {},
         _ => {},

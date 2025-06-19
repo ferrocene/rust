@@ -12,6 +12,9 @@
 // It is also interesting because the access to the corrupted data
 // occurs in the pattern-match itself, and not in the guard
 // expression.
+//@ revisions: edition2015 edition2021
+//@ [edition2015] edition: 2015..2021
+//@ [edition2021] edition: 2021..
 
 struct ForceFnOnce;
 
@@ -24,7 +27,8 @@ fn main() {
             if {
                 // ForceFnOnce needed to exploit #27282
                 (|| { *x = None; drop(force_fn_once); })();
-                //~^ ERROR cannot mutably borrow `x` in match guard [E0510]
+                //[edition2015]~^ ERROR cannot mutably borrow `x` in match guard [E0510]
+                //[edition2021]~^^ ERROR cannot mutably borrow `*x` in match guard [E0510]
                 false
             } => {}
 

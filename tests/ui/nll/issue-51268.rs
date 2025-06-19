@@ -1,3 +1,7 @@
+//@ revisions: edition2015 edition2021
+//@ [edition2015] edition: 2015..2021
+//@ [edition2021] edition: 2021..
+//@ [edition2021] check-pass
 struct Bar;
 
 impl Bar {
@@ -12,7 +16,7 @@ struct Foo {
 impl Foo {
     fn foo(&mut self) {
         self.thing.bar(|| {
-        //~^ ERROR cannot borrow `self.thing` as mutable because it is also borrowed as immutable [E0502]
+        //[edition2015]~^ ERROR cannot borrow `self.thing` as mutable because it is also borrowed as immutable [E0502]
             &self.number;
         });
     }
